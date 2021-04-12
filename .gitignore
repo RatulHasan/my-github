@@ -1,3 +1,7 @@
+# ignore node dependency directories
+node_modules/
+vendor/
+
 # ignore everything in the root except the "wp-content" directory.
 !wp-content/
 

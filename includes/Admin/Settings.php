@@ -1,0 +1,243 @@
+<?php
+/***
+ * Menu class file
+ *
+ * @since 1.0.0
+ *
+ * @author Ratul Hasan <tanjilhasanratul@gmail.com>
+ *
+ * @package MyGitHub
+ */
+
+namespace My\GitHub\Admin;
+
+use My\GitHub\Transient;
+
+/**
+ * Class SettingsApi
+ *
+ * @package Featured\Posts
+ */
+class Settings {
+
+    /**
+     * For storing sections.
+     *
+     * @var array
+     */
+    public array $sections = array();
+
+    /**
+     * For registering fields
+     *
+     * @var array
+     */
+    public array $register_setting = array();
+
+    /**
+     * For storing fields
+     *
+     * @var array
+     */
+    public array $fields = array();
+
+    /**
+     * SettingsApi constructor.
+     */
+    public function __construct() {
+        add_action( 'admin_init', array( $this, 'register_settings_page' ) );
+    }
+
+    /**
+     * Register settings page
+     *
+     * @return void
+     */
+    public function register_settings_page() {
+        $this->sections = array(
+            array(
+                'id'       => 'my_github_section',
+                'title'    => __( 'My GitHub', 'my-github' ),
+                'callback' => '',
+                'page'     => 'my-github',
+            ),
+        );
+
+        // register a new setting for "my-github" page.
+        // After adding a field you must have to add another register settings.
+        $this->register_setting = array(
+            array(
+                'option_group' => 'my_github_settings',
+                'option_name'  => 'my_github_details',
+            ),
+        );
+
+        // Values for input fields form transient api.
+        $github_username = Transient::get_github_username();
+        // register a new field in the "featured_post_section" section, inside the "my-github" page.
+        // In args (label_for, name, type, value, selected) these are my custom params.
+        $this->fields = array(
+            array(
+                'id'       => 'my_github_username',
+                'title'    => __( 'GitHub Username', 'my-github' ),
+                'callback' => array( $this, 'cb_my_github_input' ),
+                'page'     => 'my-github',
+                'section'  => 'my_github_section',
+                'args'     => array(
+                    'label_for' => 'my_github_username',
+                    'name'      => 'my_github_details[my_github_username]',
+                    'type'      => 'text',
+                    'value'     => isset( $github_username['my_github_username'] ) ? $github_username['my_github_username'] : '',
+                ),
+            ),
+            array(
+                'id'       => 'my_github_email',
+                'title'    => __( 'GitHub E-mail', 'my-github' ),
+                'callback' => array( $this, 'cb_my_github_input' ),
+                'page'     => 'my-github',
+                'section'  => 'my_github_section',
+                'args'     => array(
+                    'label_for' => 'my_github_email',
+                    'name'      => 'my_github_details[my_github_email]',
+                    'type'      => 'email',
+                    'value'     => isset( $github_username['my_github_email'] ) ? $github_username['my_github_email'] : '',
+                ),
+            ),
+            array(
+                'id'       => 'my_github_password',
+                'title'    => __( 'GitHub Password', 'my-github' ),
+                'callback' => array( $this, 'cb_my_github_input' ),
+                'page'     => 'my-github',
+                'section'  => 'my_github_section',
+                'args'     => array(
+                    'label_for' => 'my_github_password',
+                    'name'      => 'my_github_details[my_github_password]',
+                    'type'      => 'password',
+                    'value'     => isset( $github_username['my_github_password'] ) ? $github_username['my_github_password'] : '',
+                ),
+            ),
+        );
+        // Call register_custom_fields to initiate all settings.
+        $this->register_custom_fields( $this->sections, $this->fields, $this->register_setting );
+    }
+
+    /**
+     * Register and Initialize custom fields in a section
+     *
+     * @param  array $sections  Data for sections.
+     * @param  array $fields  Data for input fields.
+     * @param  array $register_setting  Data for register information.
+     *
+     * @return void
+     */
+    public function register_custom_fields( array $sections, array $fields, array $register_setting ) {
+
+        // add settings section.
+        if ( ! empty( $sections ) ) {
+            foreach ( $sections as $section ) {
+                add_settings_section(
+                    $section['id'],
+                    $section['title'],
+                    ( isset( $section['callback'] ) ? $section['callback'] : '' ),
+                    $section['page']
+                );
+            }
+        }
+
+        // register setting.
+        foreach ( $register_setting as $setting ) {
+            register_setting(
+                $setting['option_group'],
+                $setting['option_name'],
+                ( isset( $setting['callback'] ) ? $setting['callback'] : '' )
+            );
+        }
+
+        // add settings field.
+        foreach ( $fields as $field ) {
+            add_settings_field(
+                $field['id'],
+                $field['title'],
+                ( isset( $field['callback'] ) ? $field['callback'] : '' ),
+                $field['page'],
+                $field['section'],
+                ( isset( $field['args'] ) ? $field['args'] : '' )
+            );
+        }
+    }
+
+    /**
+     * Callback for post per page
+     *
+     * @param  array $args  for getting extra information.
+     *
+     * @return void
+     */
+    public function cb_my_github_input( $args = array() ) {
+        $type       = $args['type'];
+        $input_type = array(
+            'text',
+            'number',
+            'password',
+            'number',
+            'tel',
+            'file',
+            'email',
+            'url',
+        );
+
+        if ( in_array( $args['type'], $input_type, true ) ) {
+            $type = 'global_input';
+        }
+
+        $checkbox = '';
+        if ( 'checkbox' === $args['type'] ) {
+            $selected = is_array( $args['selected'] ) ? $args['selected'] : array();
+            foreach ( $args['value'] as $key => $value ) {
+                $checkbox .= "<label for='{$value}'><input id='{$value}' type='{$args['type']}' name='{$args['name']}' value='{$value}' " . checked( in_array( $value, $selected, true ), 1, false ) . '>&nbsp;' . $value . '</label></br>';
+            }
+        }
+
+        $radio = '';
+        if ( 'radio' === $args['type'] ) {
+            $selected = ! is_array( $args['selected'] ) ? $args['selected'] : '';
+            foreach ( $args['value'] as $value ) {
+                $radio .= "<label for='{$value}'><input id='{$value}' type='{$args['type']}' name='{$args['name']}' value='{$value}' "
+                          . checked( $selected, $value, false ) . '>&nbsp;' . $value . '</label></br>';
+            }
+        }
+
+        $select = '';
+        if ( 'select' === $args['type'] ) {
+            $select = '<select class="regular-text" id="' . $args['label_for'] . '" name="' . $args['name'] . '">';
+            foreach ( $args['value'] as $value ) {
+                $select .= '<option value="' . esc_attr( $value ) . '" ' . selected( esc_attr( $args['selected'] ), esc_attr( $value ), false )
+                           . '>' . esc_html( $value ) . '</option>';
+            }
+            $select .= '</select>';
+        }
+
+        switch ( $type ) {
+            case 'global_input':
+                echo '<input id="' . $args['label_for'] . '" type="' . $args['type'] . '" class="regular-text" name="' . $args['name']
+                     . '" value="' . $args['value'] . '" placeholder="Write GitHub username">';
+                break;
+            case 'radio':
+                echo $radio;
+                break;
+            case 'checkbox':
+                echo $checkbox;
+                break;
+            case 'select':
+                echo $select;
+                break;
+            case 'textarea':
+                echo "<textarea name='{$args['name']}' rows='4' cols='50'>{$args['value']}</textarea>";
+                break;
+            default:
+                echo "<input type='{$args['type']}' name='{$args['name']}' placeholder='{$args['placeholder']}'></br>";
+                break;
+        }
+    }
+
+}

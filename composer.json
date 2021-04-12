@@ -1,0 +1,21 @@
+{
+    "name": "ratul/my-github",
+    "description": "A simple WordPress plugin that can track your github's public activities.",
+    "type": "wordpress-plugin",
+    "keywords": ["gitgub", "my github"],
+    "homepage": "https://github.com/RatulHasan/my-github",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Ratul Hasan",
+            "email": "tanjilhasanratul@gmail.com",
+            "homepage": "https://github.com/RatulHasan/"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "My\\GitHub\\": "includes/"
+        },
+      "files": []
+    }
+}
