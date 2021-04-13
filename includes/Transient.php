@@ -71,28 +71,29 @@ class Transient {
             "updated_at": "2021-04-13T20:01:33Z"
         }
      *
+        $args     = array(
+            'accept'  => 'application/json',
+            'headers' => array(
+                'access_token' => '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',
+                'token_type'   => 'bearer',
+            ),
+        );
+     *
      * @return false|mixed|void
      */
     public static function get_github_root() {
         $body = get_transient( 'my_github_root' );
         if ( ! $body ) {
             $username = Transient::get_github_username();
-            $args     = array(
-                'accept'  => 'application/json',
-                'headers' => array(
-                    'access_token' => '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',
-                    'token_type'   => 'bearer',
-                ),
-            );
-            $response      = wp_remote_get( "https://api.github.com/users/{$username['my_github_username']}", $args );
+            $response      = wp_remote_get( "https://api.github.com/users/{$username['my_github_username']}" );
             $body          = wp_remote_retrieve_body( $response );
             $body          = json_decode( $body );
             $response_code = wp_remote_retrieve_response_code( $response );
 
             if ( 200 === $response_code ) {
-                set_transient( 'my_github_root', $body, DAY_IN_SECONDS );
+                set_transient( 'my_github_root', $body, HOUR_IN_SECONDS );
             } else {
-                set_transient( 'my_github_root', '', DAY_IN_SECONDS );
+                set_transient( 'my_github_root', '', HOUR_IN_SECONDS );
             }
         }
         return $body;
@@ -107,7 +108,7 @@ class Transient {
         $my_github_username = get_transient( 'my_github_details' );
         if ( ! $my_github_username ) {
             $my_github_username = get_option( 'my_github_details' );
-            set_transient( 'my_github_details', $my_github_username, DAY_IN_SECONDS );
+            set_transient( 'my_github_details', $my_github_username, HOUR_IN_SECONDS );
         }
         return $my_github_username;
     }
@@ -145,7 +146,7 @@ class Transient {
             $body     = wp_remote_retrieve_body( $response );
 
             $body = json_decode( $body );
-            set_transient( 'my_github_followers', $body, DAY_IN_SECONDS );
+            set_transient( 'my_github_followers', $body, HOUR_IN_SECONDS );
         }
         return $body;
     }
@@ -167,7 +168,7 @@ class Transient {
             $body     = wp_remote_retrieve_body( $response );
 
             $body = json_decode( $body );
-            set_transient( 'my_github_following', $body, DAY_IN_SECONDS );
+            set_transient( 'my_github_following', $body, HOUR_IN_SECONDS );
         }
         return $body;
     }
@@ -189,7 +190,7 @@ class Transient {
             $body     = wp_remote_retrieve_body( $response );
 
             $body = json_decode( $body );
-            set_transient( 'my_github_repositories', $body, DAY_IN_SECONDS );
+            set_transient( 'my_github_repositories', $body, HOUR_IN_SECONDS );
         }
         return $body;
     }
