@@ -22,7 +22,7 @@
                 <small>Bio: <?php echo esc_html( $body->bio ); ?></small>
                 <div class="row">
                     <?php
-                        $followers = \My\GitHub\Frontend\Shortcode::get_followers( $body->followers_url );
+                        $followers = \My\GitHub\Transient::get_followers( $body->followers_url );
                     ?>
                     <b class="dashicons-groups">Followers: <?php echo esc_html( count( $followers ) ); ?></b>
                     <hr/>
@@ -41,7 +41,7 @@
             <div class="row">
                 <?php
                     $following_url = str_replace( '{/other_user}', '', $body->following_url );
-                    $following_url = \My\GitHub\Frontend\Shortcode::get_following( $following_url );
+                    $following_url = \My\GitHub\Transient::get_following( $following_url );
                 ?>
                 <b>Following: <?php echo esc_html( count( $following_url ) ); ?></b>
                 <hr/>
@@ -61,7 +61,7 @@
                 <b>Repositories</b>
                 <hr/>
             <?php
-                $repos_url = \My\GitHub\Frontend\Shortcode::get_repositories( $body->subscriptions_url );
+                $repos_url = \My\GitHub\Transient::get_repositories( $body->repos_url );
 			if ( ! empty( $repos_url ) ) {
 			    echo '<ol>';
 				foreach ( $repos_url as $repos ) {
