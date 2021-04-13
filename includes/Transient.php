@@ -89,7 +89,7 @@ class Transient {
     public static function get_github_root() {
         $body = get_transient( 'my_github_root' );
         if ( ! $body ) {
-            $username = Transient::get_github_username();
+            $username      = Transient::get_github_username();
             $response      = wp_remote_get( "https://api.github.com/users/{$username['my_github_username']}" );
             $body          = wp_remote_retrieve_body( $response );
             $body          = json_decode( $body );

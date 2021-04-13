@@ -8,6 +8,7 @@
  *
  * @package MyGitHub
  */
+
 ?>
 <div class="wrap">
     <div class="card aligncenter">
@@ -16,6 +17,7 @@
             <h4>
                 <b>
                     <a href="<?php echo esc_url( $body->url ); ?>" target="_blank"><?php echo esc_html( $body->name ); ?></a>
+                    <sup title="Hireable" class="color-green"><?php echo esc_html( isset( $body->hireable ) ? 'ⓗ' : '' ); ?></sup>
                 </b>
                 <small><?php echo esc_html( $body->company ); ?></small>
             </h4>
@@ -91,6 +93,10 @@
 <style>
     .card .avatar-image {
         width: 50%;
+    }
+
+    .color-green {
+        color: green;
     }
 
     .card {
