@@ -32,6 +32,11 @@ class Transient {
      */
     public function cb_update_option() {
         delete_transient( 'my_github_details' );
+        delete_transient( 'my_github_root' );
+        delete_transient( 'my_github_details' );
+        delete_transient( 'my_github_followers' );
+        delete_transient( 'my_github_following' );
+        delete_transient( 'my_github_repositories' );
     }
 
     /**
