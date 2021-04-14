@@ -9,30 +9,32 @@
  * @package MyGitHub
  */
 
+use My\GitHub\Transient;
+
 ?>
 <div class="wrap">
-    <div class="card aligncenter">
+    <div class="container aligncenter">
         <img class="avatar-image" src="<?php echo esc_url( $body->avatar_url ); ?>" alt="<?php echo esc_attr( $body->name ); ?>">
-        <div class="container">
-            <h4>
-                <b>
-                    <a href="<?php echo esc_url( $body->url ); ?>" target="_blank"><?php echo esc_html( $body->name ); ?></a>
-                    <sup title="Hireable" class="color-green"><?php echo esc_html( isset( $body->hireable ) ? 'ⓗ' : '' ); ?></sup>
-                </b>
-                <small><?php echo esc_html( $body->company ); ?></small>
-            </h4>
-            <small>Bio: <?php echo esc_html( $body->bio ); ?></small>
-            <small class="alignright">
-                Created at:
-                <?php
-                echo esc_html( date( 'd M Y', strtotime( $body->created_at ) ) );
-                ?>
-            </small>
-            <div class="row">
-                <b>Followers: <?php echo esc_html( $body->followers ); ?></b>
-                <hr />
-                <?php
-                $followers = \My\GitHub\Transient::get_followers( $body->followers_url );
+        <h4>
+            <b>
+                <a href="<?php echo esc_url( $body->url ); ?>" target="_blank"><?php echo esc_html( $body->name ); ?></a>
+                <sup title="Hireable" class="color-green"><?php echo esc_html( isset( $body->hireable ) ? 'ⓗ' : '' ); ?></sup>
+            </b>
+            <span class="small"><?php echo esc_html( $body->company ); ?></span>
+        </h4>
+        <b class="small">Bio: <?php echo esc_html( $body->bio ); ?></b>
+        <b class="alignright">
+            Created at:
+            <?php
+            echo esc_html( date( 'd M Y', strtotime( $body->created_at ) ) );
+            ?>
+        </b>
+        <div class="mt">
+            <b>Followers: <?php echo esc_html( $body->followers ); ?></b>
+            <hr />
+            <?php
+            if ( isset( $my_github_details['is_show_followers'] ) ) {
+                $followers = Transient::get_my_github_details( $body->followers_url );
                 if ( ! empty( $followers ) ) {
                     foreach ( $followers as $follower ) {
                         ?>
@@ -42,14 +44,16 @@
                         <?php
                     }
                 }
-                ?>
-            </div>
-            <div class="row">
-                <b>Following: <?php echo esc_html( $body->following ); ?></b>
-                <hr />
-                <?php
+            }
+            ?>
+        </div>
+        <div class="mt">
+            <b>Following: <?php echo esc_html( $body->following ); ?></b>
+            <hr />
+            <?php
+            if ( isset( $my_github_details['is_show_following'] ) ) {
                 $following_url = str_replace( '{/other_user}', '', $body->following_url );
-                $following_url = \My\GitHub\Transient::get_following( $following_url );
+                $following_url = Transient::get_my_github_details( $following_url );
                 if ( ! empty( $following_url ) ) {
                     foreach ( $following_url as $following ) {
                         ?>
@@ -59,68 +63,47 @@
                         <?php
                     }
                 }
-                ?>
-            </div>
-            <div class="row">
-                <b>Public Repositories: <?php echo esc_html( $body->public_repos ); ?></b>
-                <hr />
-                <?php
-                $repos_url = \My\GitHub\Transient::get_repositories( $body->repos_url );
+            }
+            ?>
+        </div>
+        <div class="mt">
+            <b>Public Repositories: <?php echo esc_html( $body->public_repos ); ?></b>
+            <hr />
+            <?php
+            if ( isset( $my_github_details['is_show_my_github_public_repos'] ) ) {
+                $repos_url = Transient::get_my_github_details( $body->repos_url );
                 if ( ! empty( $repos_url ) ) {
                     echo '<ol>';
                     foreach ( $repos_url as $repos ) {
                         ?>
                         <li>
-                            <a href="<?php echo esc_url( $repos->html_url ); ?>" target="_blank">
-                                <?php echo esc_attr( $repos->name ); ?>
-                            </a>
+                        <a href="<?php echo esc_url( $repos->html_url ); ?>" target="_blank">
+                            <strong class="font-big"><?php echo esc_attr( $repos->name ); ?></strong>
+                        </a>
+                        <?php
+                        if ( $repos->fork ) {
+                            echo ' (Forked)';
+                        }
+
+                        if ( isset( $my_github_details['is_show_my_github_repos_language'] ) ) {
+                            ?>
+                            <div class="font-medium">Language used</div>
                             <?php
-                            if ( $repos->fork ) {
-                                echo ' (Forked)';
+                            $language_url = 'https://api.github.com/repos/' . esc_html( $body->login ) . '/' . esc_html( $repos->name )
+                                            . '/languages';
+                            $language     = Transient::get_my_github_details( $language_url );
+                            foreach ( $language as $key => $item ) {
+                                echo "<span class='color-darkorange'> {$key}</span> {$item} bytes<br/>";
                             }
                             ?>
-                        </li>
-                        <?php
+                            <?php
+                        }
+                        echo '</li><hr/>';
                     }
-                    echo '</ol>';
+                        echo '</ol>';
                 }
-                ?>
-            </div>
+            }
+            ?>
         </div>
     </div>
 </div>
-
-<style>
-    .card .avatar-image {
-        width: 50%;
-    }
-
-    .color-green {
-        color: green;
-    }
-
-    .card {
-        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
-        transition: 0.3s;
-        width: 90%;
-    }
-
-    .follower_img {
-        width: 10%;
-        border-radius: 50%;
-        padding: 5px 10px;
-    }
-
-    .row {
-        margin: 20px;
-        padding-bottom: 10px;
-    }
-
-    small {
-        font-size: 14px;
-    }
-
-    .container {
-        padding: 5px 20px;
-    }
-</style>

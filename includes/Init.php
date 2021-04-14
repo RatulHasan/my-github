@@ -33,6 +33,7 @@ class Init {
             new Settings();
             new Transient();
         } else {
+            new Assets();
             new Shortcode();
         }
     }

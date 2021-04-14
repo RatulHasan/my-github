@@ -65,7 +65,7 @@ class MyGithub {
         define( 'MY_GITHUB_BASE_PATH', __DIR__ );
         define( 'MY_GITHUB_INCLUDE_PATH', __DIR__ . '/includes' );
         define( 'MY_GITHUB_URL', plugins_url( '', __FILE__ ) );
-        define( 'MY_GITHUB_ASSETS', MY_GITHUB_BASE_PATH . '/assets' );
+        define( 'MY_GITHUB_ASSETS', MY_GITHUB_URL . '/assets' );
     }
 
     /**

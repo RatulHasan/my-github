@@ -57,7 +57,13 @@ class Settings {
         $this->sections = array(
             array(
                 'id'       => 'my_github_section',
-                'title'    => __( 'My GitHub', 'my-github' ),
+                'title'    => __( 'GitHub Settings', 'my-github' ),
+                'callback' => '',
+                'page'     => 'my-github',
+            ),
+            array(
+                'id'       => 'my_github_view_section',
+                'title'    => __( 'View Settings', 'my-github' ),
                 'callback' => '',
                 'page'     => 'my-github',
             ),
@@ -73,7 +79,7 @@ class Settings {
         );
 
         // Values for input fields form transient api.
-        $github_username = Transient::get_github_username();
+        $my_github_details = Transient::admin_my_github_details();
         // register a new field in the "featured_post_section" section, inside the "my-github" page.
         // In args (label_for, name, type, value, selected) these are my custom params.
         $this->fields = array(
@@ -87,33 +93,77 @@ class Settings {
                     'label_for' => 'my_github_username',
                     'name'      => 'my_github_details[my_github_username]',
                     'type'      => 'text',
-                    'value'     => isset( $github_username['my_github_username'] ) ? $github_username['my_github_username'] : '',
+                    'value'     => isset( $my_github_details['my_github_username'] ) ? $my_github_details['my_github_username'] : '',
                 ),
             ),
             array(
-                'id'       => 'my_github_email',
-                'title'    => __( 'GitHub E-mail', 'my-github' ),
+                'id'       => 'is_show_my_github_followers',
+                'title'    => __( 'Show Followers', 'my-github' ),
                 'callback' => array( $this, 'cb_my_github_input' ),
                 'page'     => 'my-github',
-                'section'  => 'my_github_section',
+                'section'  => 'my_github_view_section',
                 'args'     => array(
-                    'label_for' => 'my_github_email',
-                    'name'      => 'my_github_details[my_github_email]',
-                    'type'      => 'email',
-                    'value'     => isset( $github_username['my_github_email'] ) ? $github_username['my_github_email'] : '',
+                    'label_for' => 'is_show_followers',
+                    'name'      => 'my_github_details[is_show_followers]',
+                    'type'      => 'checkbox',
+                    'value'     => 1,
+                    'selected'  => isset( $my_github_details['is_show_followers'] ),
                 ),
             ),
             array(
-                'id'       => 'my_github_password',
-                'title'    => __( 'GitHub Password', 'my-github' ),
+                'id'       => 'is_show_my_github_following',
+                'title'    => __( 'Show Following', 'my-github' ),
                 'callback' => array( $this, 'cb_my_github_input' ),
                 'page'     => 'my-github',
-                'section'  => 'my_github_section',
+                'section'  => 'my_github_view_section',
                 'args'     => array(
-                    'label_for' => 'my_github_password',
-                    'name'      => 'my_github_details[my_github_password]',
-                    'type'      => 'password',
-                    'value'     => isset( $github_username['my_github_password'] ) ? $github_username['my_github_password'] : '',
+                    'label_for' => 'is_show_following',
+                    'name'      => 'my_github_details[is_show_following]',
+                    'type'      => 'checkbox',
+                    'value'     => 1,
+                    'selected'  => isset( $my_github_details['is_show_following'] ),
+                ),
+            ),
+            array(
+                'id'       => 'is_show_my_github_public_repos',
+                'title'    => __( 'Show Public Repos', 'my-github' ),
+                'callback' => array( $this, 'cb_my_github_input' ),
+                'page'     => 'my-github',
+                'section'  => 'my_github_view_section',
+                'args'     => array(
+                    'label_for' => 'is_show_my_github_public_repos',
+                    'name'      => 'my_github_details[is_show_my_github_public_repos]',
+                    'type'      => 'checkbox',
+                    'value'     => 1,
+                    'selected'  => isset( $my_github_details['is_show_my_github_public_repos'] ),
+                ),
+            ),
+            array(
+                'id'       => 'is_show_my_github_private_repos',
+                'title'    => __( 'Show Private Repos', 'my-github' ),
+                'callback' => array( $this, 'cb_my_github_input' ),
+                'page'     => 'my-github',
+                'section'  => 'my_github_view_section',
+                'args'     => array(
+                    'label_for' => 'is_show_my_github_private_repos',
+                    'name'      => 'my_github_details[is_show_my_github_private_repos]',
+                    'type'      => 'checkbox',
+                    'value'     => 1,
+                    'selected'  => isset( $my_github_details['is_show_my_github_private_repos'] ),
+                ),
+            ),
+            array(
+                'id'       => 'is_show_my_github_repos_language',
+                'title'    => __( 'Show Repos Language', 'my-github' ),
+                'callback' => array( $this, 'cb_my_github_input' ),
+                'page'     => 'my-github',
+                'section'  => 'my_github_view_section',
+                'args'     => array(
+                    'label_for' => 'is_show_my_github_repos_language',
+                    'name'      => 'my_github_details[is_show_my_github_repos_language]',
+                    'type'      => 'checkbox',
+                    'value'     => 1,
+                    'selected'  => isset( $my_github_details['is_show_my_github_repos_language'] ),
                 ),
             ),
         );
@@ -192,9 +242,14 @@ class Settings {
 
         $checkbox = '';
         if ( 'checkbox' === $args['type'] ) {
-            $selected = is_array( $args['selected'] ) ? $args['selected'] : array();
-            foreach ( $args['value'] as $key => $value ) {
-                $checkbox .= "<label for='{$value}'><input id='{$value}' type='{$args['type']}' name='{$args['name']}' value='{$value}' " . checked( in_array( $value, $selected, true ), 1, false ) . '>&nbsp;' . $value . '</label></br>';
+            if ( is_array( $args['value'] ) ) {
+                $selected = is_array( $args['selected'] ) ? $args['selected'] : array();
+                foreach ( $args['value'] as $key => $value ) {
+                    $checkbox .= "<input id='{$value}' type='{$args['type']}' name='{$args['name']}' value='{$value}' " . checked( in_array( $value, $selected, true ), 1, false ) . '>';
+                }
+            } else {
+                $selected  = $args['selected'];
+                $checkbox .= "<input id='{$args['value']}' type='{$args['type']}' name='{$args['name']}' value='{$args['value']}' " . checked( $selected, $args['value'], false ) . '>';
             }
         }
 

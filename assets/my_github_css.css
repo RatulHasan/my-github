@@ -1,0 +1,41 @@
+.card {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    width: 100%;
+}
+
+.small {
+    font-size: 14px;
+}
+
+.font-medium{
+    font-size: 18px;
+}
+
+.font-big{
+    font-size: 22px;
+}
+
+.color-green {
+    color: green;
+}
+.color-darkorange {
+    color: darkorange;
+}
+.follower_img {
+    width: 10%;
+    border-radius: 50%;
+    padding: 5px 10px;
+}
+
+.mt{
+    margin-top: 50px;
+}
+
+small {
+    font-size: 14px;
+}
+
+.container {
+    padding: 5px 20px;
+}

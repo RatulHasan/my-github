@@ -11,7 +11,7 @@
 
 ?>
 <div class="wrap">
-    <h1 class="wp-heading-inline"><?php esc_html_e( 'My Github Settings', 'my-github' ); ?></h1>
+    <h1 class="wp-heading-inline"><?php esc_html_e( 'My Github', 'my-github' ); ?></h1>
     <form method="post" action="options.php">
         <?php
         settings_fields( 'my_github_settings' );

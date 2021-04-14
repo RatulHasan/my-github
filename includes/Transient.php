@@ -31,11 +31,22 @@ class Transient {
      * @return void
      */
     public function cb_update_option() {
-        delete_transient( 'my_github_details' );
+        delete_transient( 'admin_my_github_details' );
         delete_transient( 'my_github_root' );
-        delete_transient( 'my_github_followers' );
-        delete_transient( 'my_github_following' );
-        delete_transient( 'my_github_repositories' );
+    }
+
+    /**
+     * Get github username
+     *
+     * @return false|mixed|void
+     */
+    public static function admin_my_github_details() {
+        $my_github_details = get_transient( 'admin_my_github_details' );
+        if ( ! $my_github_details ) {
+            $my_github_details = get_option( 'my_github_details' );
+            set_transient( 'admin_my_github_details', $my_github_details, HOUR_IN_SECONDS );
+        }
+        return $my_github_details;
     }
 
     /**
@@ -88,113 +99,48 @@ class Transient {
     public static function get_github_root() {
         $body = get_transient( 'my_github_root' );
         if ( ! $body ) {
-            $username      = Transient::get_github_username();
+            $username      = Transient::admin_my_github_details();
             $response      = wp_remote_get( "https://api.github.com/users/{$username['my_github_username']}" );
             $body          = wp_remote_retrieve_body( $response );
             $body          = json_decode( $body );
             $response_code = wp_remote_retrieve_response_code( $response );
 
+            if ( 403 === $response_code ) {
+                return false;
+            }
             if ( 200 === $response_code ) {
                 set_transient( 'my_github_root', $body, HOUR_IN_SECONDS );
             } else {
-                set_transient( 'my_github_root', '', HOUR_IN_SECONDS );
+                $body = '';
             }
         }
         return $body;
     }
 
     /**
-     * Get github username
+     * To get github details
      *
-     * @return false|mixed|void
-     */
-    public static function get_github_username() {
-        $my_github_username = get_transient( 'my_github_details' );
-        if ( ! $my_github_username ) {
-            $my_github_username = get_option( 'my_github_details' );
-            set_transient( 'my_github_details', $my_github_username, HOUR_IN_SECONDS );
-        }
-        return $my_github_username;
-    }
-
-    /**
-     * To get github username
-     *
-     * @param  string $username  github username.
+     * @param  string $url  github api url.
      *
      * @return mixed
      */
-	// public static function get_username( string $username ) {
-	// if ( ! $username ) {
-	// return false;
-	// }
-	// $response = wp_remote_get( "$username" );
-	// $body     = wp_remote_retrieve_body( $response );
-	//
-	// return json_decode( $body );
-	// }
-    /**
-     * To get github followers
-     *
-     * @param  string $followers  github followers.
-     *
-     * @return mixed
-     */
-    public static function get_followers( string $followers ) {
-        $body = get_transient( 'my_github_followers' );
+    public static function get_my_github_details( string $url ) {
+        $cash_key = md5( $url );
+        $body     = get_transient( "my_github_details_{$cash_key}" );
         if ( ! $body ) {
-            if ( ! $followers ) {
+            if ( ! $url ) {
                 return false;
             }
-            $response = wp_remote_get( "$followers" );
-            $body     = wp_remote_retrieve_body( $response );
+            $response      = wp_remote_get( "$url" );
+            $response_code = wp_remote_retrieve_response_code( $response );
 
-            $body = json_decode( $body );
-            set_transient( 'my_github_followers', $body, HOUR_IN_SECONDS );
-        }
-        return $body;
-    }
-
-    /**
-     * To get github following
-     *
-     * @param  string $following_url  github following.
-     *
-     * @return mixed
-     */
-    public static function get_following( string $following_url ) {
-        $body = get_transient( 'my_github_following' );
-        if ( ! $body ) {
-            if ( ! $following_url ) {
-                return false;
+            if ( 200 === $response_code ) {
+                $body = wp_remote_retrieve_body( $response );
+                $body = json_decode( $body );
+            } else {
+                $body = '';
             }
-            $response = wp_remote_get( "$following_url" );
-            $body     = wp_remote_retrieve_body( $response );
-
-            $body = json_decode( $body );
-            set_transient( 'my_github_following', $body, HOUR_IN_SECONDS );
-        }
-        return $body;
-    }
-
-    /**
-     * To get github repos_url
-     *
-     * @param  string $repos_url  github repos_url.
-     *
-     * @return mixed
-     */
-    public static function get_repositories( string $repos_url ) {
-        $body = get_transient( 'my_github_repositories' );
-        if ( ! $body ) {
-            if ( ! $repos_url ) {
-                return false;
-            }
-            $response = wp_remote_get( "$repos_url" );
-            $body     = wp_remote_retrieve_body( $response );
-
-            $body = json_decode( $body );
-            set_transient( 'my_github_repositories', $body, HOUR_IN_SECONDS );
+            set_transient( "my_github_details_{$cash_key}", $body, HOUR_IN_SECONDS );
         }
         return $body;
     }
