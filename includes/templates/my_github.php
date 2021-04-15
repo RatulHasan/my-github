@@ -86,14 +86,15 @@ use My\GitHub\Transient;
                         }
 
                         if ( isset( $my_github_details['is_show_my_github_repos_language'] ) ) {
-                            ?>
-                            <div class="font-medium">Language used</div>
-                            <?php
-                            $language_url = 'https://api.github.com/repos/' . esc_html( $body->login ) . '/' . esc_html( $repos->name )
-                                            . '/languages';
+                            $language_url = 'https://api.github.com/repos/' . esc_html( $body->login ) . '/' . esc_html( $repos->name ) . '/languages';
                             $language     = Transient::get_my_github_details( $language_url );
-                            foreach ( $language as $key => $item ) {
-                                echo "<span class='color-darkorange'> {$key}</span> {$item} bytes<br/>";
+                            if ( ! empty( (array) $language ) ) {
+								?>
+                                    <div class="font-medium">Language used</div>
+								<?php
+                                foreach ( $language as $key => $item ) {
+                                    echo "<span class='color-darkorange'> {$key}</span> {$item} bytes<br/>";
+                                }
                             }
                             ?>
                             <?php
