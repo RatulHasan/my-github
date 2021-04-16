@@ -63,6 +63,9 @@ class Shortcode {
 
         $body = Transient::get_github_root();
         if ( $body ) {
+            $git_name  = __( 'GitHub Profile', 'my-github' );
+            $git_name .= ' <i class="fab fa-github"></i>';
+            $git_name  = apply_filters( 'git_name_header', $git_name );
             include_once MY_GITHUB_INCLUDE_PATH . '/templates/my_github.php';
         }
     }

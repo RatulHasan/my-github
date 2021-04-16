@@ -125,6 +125,76 @@ class Settings {
                 ),
             ),
             array(
+                'id'       => 'is_show_my_github_company',
+                'title'    => __( 'Show Company', 'my-github' ),
+                'callback' => array( $this, 'cb_my_github_input' ),
+                'page'     => 'my-github',
+                'section'  => 'my_github_view_section',
+                'args'     => array(
+                    'label_for' => 'is_show_company',
+                    'name'      => 'my_github_details[is_show_company]',
+                    'type'      => 'checkbox',
+                    'value'     => 1,
+                    'selected'  => isset( $my_github_details['is_show_company'] ),
+                ),
+            ),
+            array(
+                'id'       => 'is_show_my_github_location',
+                'title'    => __( 'Show Location', 'my-github' ),
+                'callback' => array( $this, 'cb_my_github_input' ),
+                'page'     => 'my-github',
+                'section'  => 'my_github_view_section',
+                'args'     => array(
+                    'label_for' => 'is_show_location',
+                    'name'      => 'my_github_details[is_show_location]',
+                    'type'      => 'checkbox',
+                    'value'     => 1,
+                    'selected'  => isset( $my_github_details['is_show_location'] ),
+                ),
+            ),
+            array(
+                'id'       => 'is_show_my_github_email',
+                'title'    => __( 'Show Email', 'my-github' ),
+                'callback' => array( $this, 'cb_my_github_input' ),
+                'page'     => 'my-github',
+                'section'  => 'my_github_view_section',
+                'args'     => array(
+                    'label_for' => 'is_show_email',
+                    'name'      => 'my_github_details[is_show_email]',
+                    'type'      => 'checkbox',
+                    'value'     => 1,
+                    'selected'  => isset( $my_github_details['is_show_email'] ),
+                ),
+            ),
+            array(
+                'id'       => 'is_show_my_github_blog',
+                'title'    => __( 'Show Blog', 'my-github' ),
+                'callback' => array( $this, 'cb_my_github_input' ),
+                'page'     => 'my-github',
+                'section'  => 'my_github_view_section',
+                'args'     => array(
+                    'label_for' => 'is_show_blog',
+                    'name'      => 'my_github_details[is_show_blog]',
+                    'type'      => 'checkbox',
+                    'value'     => 1,
+                    'selected'  => isset( $my_github_details['is_show_blog'] ),
+                ),
+            ),
+            array(
+                'id'       => 'is_show_my_github_twitter',
+                'title'    => __( 'Show Twitter', 'my-github' ),
+                'callback' => array( $this, 'cb_my_github_input' ),
+                'page'     => 'my-github',
+                'section'  => 'my_github_view_section',
+                'args'     => array(
+                    'label_for' => 'is_show_twitter',
+                    'name'      => 'my_github_details[is_show_twitter]',
+                    'type'      => 'checkbox',
+                    'value'     => 1,
+                    'selected'  => isset( $my_github_details['is_show_twitter'] ),
+                ),
+            ),
+            array(
                 'id'       => 'is_show_my_github_public_repos',
                 'title'    => __( 'Show Public Repos', 'my-github' ),
                 'callback' => array( $this, 'cb_my_github_input' ),
@@ -245,11 +315,11 @@ class Settings {
             if ( is_array( $args['value'] ) ) {
                 $selected = is_array( $args['selected'] ) ? $args['selected'] : array();
                 foreach ( $args['value'] as $key => $value ) {
-                    $checkbox .= "<input id='{$value}' type='{$args['type']}' name='{$args['name']}' value='{$value}' " . checked( in_array( $value, $selected, true ), 1, false ) . '>';
+                    $checkbox .= "<input id='{$args['label_for']}' type='{$args['type']}' name='{$args['name']}' value='{$value}' " . checked( in_array( $value, $selected, true ), 1, false ) . '>';
                 }
             } else {
                 $selected  = $args['selected'];
-                $checkbox .= "<input id='{$args['value']}' type='{$args['type']}' name='{$args['name']}' value='{$args['value']}' " . checked( $selected, $args['value'], false ) . '>';
+                $checkbox .= "<input id='{$args['label_for']}' type='{$args['type']}' name='{$args['name']}' value='{$args['value']}' " . checked( $selected, $args['value'], false ) . '>';
             }
         }
 
@@ -257,8 +327,7 @@ class Settings {
         if ( 'radio' === $args['type'] ) {
             $selected = ! is_array( $args['selected'] ) ? $args['selected'] : '';
             foreach ( $args['value'] as $value ) {
-                $radio .= "<label for='{$value}'><input id='{$value}' type='{$args['type']}' name='{$args['name']}' value='{$value}' "
-                          . checked( $selected, $value, false ) . '>&nbsp;' . $value . '</label></br>';
+                $radio .= "<input id='{$args['label_for']}' type='{$args['type']}' name='{$args['name']}' value='{$value}' " . checked( $selected, $value, false ) . '>';
             }
         }
 
