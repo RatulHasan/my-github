@@ -90,9 +90,14 @@ class Transient {
             'accept'  => 'application/json',
             'headers' => array(
                 'access_token' => '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',
+                'Client ID' => 'da604728e4ffab4c5b39',
+                'Client secrets' => 'b0eeb20d3343b98c85efa7b774bfed08bfd6a814',
+                'code' => '6e826d15b420fcce27fa',
                 'token_type'   => 'bearer',
             ),
         );
+     * We're going to now talk to the GitHub API. Ready?
+    <a href="https://github.com/login/oauth/authorize?scope=ratuljh@gmail.com&client_id=da604728e4ffab4c5b39">Click here</a> to begin!</a>
      *
      * @return false|mixed|void
      */

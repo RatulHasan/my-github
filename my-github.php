@@ -2,13 +2,13 @@
 /**
  * Plugin Name:         My Github
  * Plugin URI:          https://github.com/RatulHasan/my-github
- * Description:         A simple WordPress plugin that can track your github's profile, and github's public events.
+ * Description:         A simple and nice WordPress plugin that can track your github's profile and github's public events.
  * Version:             1.0.0
  * Requires at least:   5.2
  * Author:              Ratul Hasan
  * Author URI:          https://ratuljh.wordpress.com/
  * License:             GPL-2.0-or-later
- * License URI:         https://www.gnu.org/licenses/gpl-2.0.html
+ * License URI:         https://www.gnu.org/licenses/gpl-3.0.en.html
  * Text Domain:         my-github
  * Domain Path:         /languages
  *
