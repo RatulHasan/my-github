@@ -51,53 +51,6 @@ class Transient {
 
     /**
      * Get github root
-     * {
-            "login": "RatulHasan",
-            "id": 14246834,
-            "node_id": "MDQ6VXNlcjE0MjQ2ODM0",
-            "avatar_url": "https://avatars.githubusercontent.com/u/14246834?v=4",
-            "gravatar_id": "",
-            "url": "https://api.github.com/users/RatulHasan",
-            "html_url": "https://github.com/RatulHasan",
-            "followers_url": "https://api.github.com/users/RatulHasan/followers",
-            "following_url": "https://api.github.com/users/RatulHasan/following{/other_user}",
-            "gists_url": "https://api.github.com/users/RatulHasan/gists{/gist_id}",
-            "starred_url": "https://api.github.com/users/RatulHasan/starred{/owner}{/repo}",
-            "subscriptions_url": "https://api.github.com/users/RatulHasan/subscriptions",
-            "organizations_url": "https://api.github.com/users/RatulHasan/orgs",
-            "repos_url": "https://api.github.com/users/RatulHasan/repos",
-            "events_url": "https://api.github.com/users/RatulHasan/events{/privacy}",
-            "received_events_url": "https://api.github.com/users/RatulHasan/received_events",
-            "type": "User",
-            "site_admin": false,
-            "name": "Ratul Hasan",
-            "company": "@besoftySoftware ",
-            "blog": "https://besofty.com/",
-            "location": "Dhaka, Bangladesh",
-            "email": null,
-            "hireable": true,
-            "bio": "Ratul the lazy man. ",
-            "twitter_username": null,
-            "public_repos": 74,
-            "public_gists": 3,
-            "followers": 12,
-            "following": 36,
-            "created_at": "2015-09-12T09:03:34Z",
-            "updated_at": "2021-04-13T20:01:33Z"
-        }
-     *
-        $args     = array(
-            'accept'  => 'application/json',
-            'headers' => array(
-                'access_token' => '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',
-                'Client ID' => 'da604728e4ffab4c5b39',
-                'Client secrets' => 'b0eeb20d3343b98c85efa7b774bfed08bfd6a814',
-                'code' => '6e826d15b420fcce27fa',
-                'token_type'   => 'bearer',
-            ),
-        );
-     * We're going to now talk to the GitHub API. Ready?
-    <a href="https://github.com/login/oauth/authorize?scope=ratuljh@gmail.com&client_id=da604728e4ffab4c5b39">Click here</a> to begin!</a>
      *
      * @return false|mixed|void
      */
@@ -127,8 +80,6 @@ class Transient {
     public static function get_github_all_events() {
         $body = get_transient( 'my_github_all_events' );
         if ( ! $body ) {
-//            https://api.github.com/users/{$username['my_github_username']}/events
-            $username = Transient::admin_my_github_details();
             $response = wp_remote_get( 'https://api.github.com/events' );
             $body     = wp_remote_retrieve_body( $response );
             $body     = json_decode( $body );

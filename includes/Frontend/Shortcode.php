@@ -42,11 +42,6 @@ class Shortcode {
      * @return false|void
      */
     public function cb_my_github_shortcode() {
-        // GitHub Token
-        // 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
-        // https://api.github.com/gists/starred?access_token=OAUTH-TOKEN
-        // $response = wp_remote_get( "https://api.github.com/users/{$username['my_github_username']}?access_token=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" );
-
         $my_github_details = Transient::admin_my_github_details();
         if ( empty( $my_github_details['my_github_username'] ) ) {
             return false;

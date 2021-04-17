@@ -69,8 +69,6 @@ class Settings {
             ),
         );
 
-        // register a new setting for "my-github" page.
-        // After adding a field you must have to add another register settings.
         $this->register_setting = array(
             array(
                 'option_group' => 'my_github_settings',
@@ -80,8 +78,7 @@ class Settings {
 
         // Values for input fields form transient api.
         $my_github_details = Transient::admin_my_github_details();
-        // register a new field in the "featured_post_section" section, inside the "my-github" page.
-        // In args (label_for, name, type, value, selected) these are my custom params.
+
         $this->fields = array(
             array(
                 'id'       => 'my_github_username',
@@ -335,8 +332,7 @@ class Settings {
         if ( 'select' === $args['type'] ) {
             $select = '<select class="regular-text" id="' . $args['label_for'] . '" name="' . $args['name'] . '">';
             foreach ( $args['value'] as $value ) {
-                $select .= '<option value="' . esc_attr( $value ) . '" ' . selected( esc_attr( $args['selected'] ), esc_attr( $value ), false )
-                           . '>' . esc_html( $value ) . '</option>';
+                $select .= '<option value="' . esc_attr( $value ) . '" ' . selected( esc_attr( $args['selected'] ), esc_attr( $value ), false ) . '>' . esc_html( $value ) . '</option>';
             }
             $select .= '</select>';
         }

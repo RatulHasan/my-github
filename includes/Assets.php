@@ -25,22 +25,16 @@ class Assets {
         add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts' ) );
         // FOR FRONTEND.
         add_action( 'wp_enqueue_scripts', array( $this, 'register_front_end_scripts' ) );
-        add_filter('mce_buttons', [$this, 'add_tinymce_button']);
-    }
-
-    public function add_tinymce_button( $button ) {
-//        echo '<pre>';
-//        print_r( $button );
-//        exit();
-        return $button;
     }
 
     /**
      * Load Admin assets
      *
+     * @param string $screen check current screen.
+     *
      * @return void
      */
-    public function register_admin_scripts( $screen ) {
+    public function register_admin_scripts( string $screen ) {
         $scripts = $this->get_admin_scripts();
         foreach ( $scripts as $handle => $script ) {
             wp_register_script( $handle, $script['src'], $script['deps'], $script['ver'], true );
@@ -88,9 +82,9 @@ class Assets {
     public function get_front_end_styles() {
         return array(
             'my-github-styles' => array(
-                'src'  => MY_GITHUB_ASSETS . '/my_github.css',
+                'src'  => MY_GITHUB_ASSETS . '/my_github.min.css',
                 'deps' => array(),
-                'ver'  => filemtime( MY_GITHUB_BASE_PATH . '/assets/my_github.css' ),
+                'ver'  => filemtime( MY_GITHUB_BASE_PATH . '/assets/my_github.min.css' ),
             ),
         );
     }

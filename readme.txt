@@ -4,7 +4,7 @@ Tags: github, github\'s profile, github\'s events,
 Requires at least: 5.2
 Tested up to: 5.7.1
 Requires PHP: 5.6
-Stable tag: trunk
+Stable tag: 1.0.0
 License: PL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 
@@ -12,7 +12,7 @@ A simple and nice WordPress plugin that can track your github\'s profile and git
 
 == Description ==
 A simple and nice WordPress plugin that can track your github\'s profile and github\'s public events. You can showcase your Followers, Following, Company, Location, Blog URL, Twitter Account, Public Repositories, Public Repository\'s Used Language.
-If the installation is okay, go  and create a page and/or post or update a page and/or post and insert a Shortcode [my_github] to show your profile and/or [my_github_all_events] to show Github\'s recent events.
+If the installation is okay, go  and create a page and/or post or update a page and/or post and insert a Shortcode 👉 [my_github] to show your profile and/or 👉 [my_github_all_events] to show Github\'s recent events.
 You can also find Quick Tags in your editor. You can also setup your settings from My GitHub under Settings page. That\'s it.
 
 == Installation ==
