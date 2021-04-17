@@ -206,20 +206,6 @@ class Settings {
                 ),
             ),
             array(
-                'id'       => 'is_show_my_github_private_repos',
-                'title'    => __( 'Show Private Repos', 'my-github' ),
-                'callback' => array( $this, 'cb_my_github_input' ),
-                'page'     => 'my-github',
-                'section'  => 'my_github_view_section',
-                'args'     => array(
-                    'label_for' => 'is_show_my_github_private_repos',
-                    'name'      => 'my_github_details[is_show_my_github_private_repos]',
-                    'type'      => 'checkbox',
-                    'value'     => 1,
-                    'selected'  => isset( $my_github_details['is_show_my_github_private_repos'] ),
-                ),
-            ),
-            array(
                 'id'       => 'is_show_my_github_repos_language',
                 'title'    => __( 'Show Repos Language', 'my-github' ),
                 'callback' => array( $this, 'cb_my_github_input' ),
