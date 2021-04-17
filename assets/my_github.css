@@ -32,16 +32,15 @@
     border-radius: 50%;
     padding: 5px 10px;
 }
+.events-avatar-image-circle{
+    width: 50px;
+    border-radius: 50%;
+    padding: 5px;
+}
 .mt{
     margin-top: 50px;
 }
 
-small {
-    font-size: 14px;
-}
-.medium-font{
-    font-size: 18px;
-}
 .plugin-side-options{
     background: linear-gradient(to bottom, #EAECEC 0%, white 100%);  /*EAECEC*/
     min-height:520px;

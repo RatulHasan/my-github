@@ -25,6 +25,14 @@ class Assets {
         add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts' ) );
         // FOR FRONTEND.
         add_action( 'wp_enqueue_scripts', array( $this, 'register_front_end_scripts' ) );
+        add_filter('mce_buttons', [$this, 'add_tinymce_button']);
+    }
+
+    public function add_tinymce_button( $button ) {
+//        echo '<pre>';
+//        print_r( $button );
+//        exit();
+        return $button;
     }
 
     /**
@@ -32,12 +40,14 @@ class Assets {
      *
      * @return void
      */
-    public function register_admin_scripts() {
-//        $styles = $this->get_admin_styles();
-//        foreach ( $styles as $handle => $style ) {
-//            wp_register_style( $handle, $style['src'], $style['deps'], $style['ver'] );
-//        }
-//        wp_enqueue_style( 'my-github-styles' );
+    public function register_admin_scripts( $screen ) {
+        $scripts = $this->get_admin_scripts();
+        foreach ( $scripts as $handle => $script ) {
+            wp_register_script( $handle, $script['src'], $script['deps'], $script['ver'], true );
+        }
+        if ( 'post.php' === $screen || 'post-new.php' === $screen ) {
+			wp_enqueue_script( 'my-github-scripts' );
+        }
     }
 
     /**
@@ -45,12 +55,12 @@ class Assets {
      *
      * @return array[]
      */
-    public function get_admin_styles() {
+    public function get_admin_scripts() {
         return array(
-            'my-github-styles' => array(
-                'src'  => MY_GITHUB_ASSETS . '/my_github_css.css',
-                'deps' => array(),
-                'ver'  => filemtime( MY_GITHUB_BASE_PATH . '/assets/my_github_css.css' ),
+            'my-github-scripts' => array(
+                'src'  => MY_GITHUB_ASSETS . '/my_github_qtags.js',
+                'deps' => array( 'quicktags' ),
+                'ver'  => filemtime( MY_GITHUB_BASE_PATH . '/assets/my_github_qtags.js' ),
             ),
         );
     }

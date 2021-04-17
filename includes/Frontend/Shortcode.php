@@ -33,16 +33,7 @@ class Shortcode {
     public function __construct() {
         $this->admin_transient = new Transient();
         add_shortcode( 'my_github', array( $this, 'cb_my_github_shortcode' ) );
-        add_action( 'wp_enqueue_scripts', array( $this, 'load_dashicons_front_end' ) );
-    }
-
-    /**
-     * Load dashicons
-     *
-     * @return void
-     */
-    public function load_dashicons_front_end() {
-        wp_enqueue_style( 'dashicons' );
+        add_shortcode( 'my_github_all_events', array( $this, 'cb_my_github_all_events_shortcode' ) );
     }
 
     /**
@@ -66,7 +57,28 @@ class Shortcode {
             $git_name  = __( 'GitHub Profile', 'my-github' );
             $git_name .= ' <i class="fab fa-github"></i>';
             $git_name  = apply_filters( 'git_name_header', $git_name );
-            include_once MY_GITHUB_INCLUDE_PATH . '/templates/my_github.php';
+            include_once MY_GITHUB_INCLUDE_PATH . '/templates/my_github_profile.php';
         }
     }
+
+    /**
+     * Callback for My GitHub shortcode
+     *
+     * @return false|void
+     */
+    public function cb_my_github_all_events_shortcode() {
+        $my_github_details = Transient::admin_my_github_details();
+        if ( empty( $my_github_details['my_github_username'] ) ) {
+            return false;
+        }
+
+        $body = Transient::get_github_all_events();
+        if ( $body ) {
+            $git_name  = __( 'All Events', 'my-github' );
+            $git_name .= ' <i class="fab fa-github"></i>';
+            $git_name  = apply_filters( 'git_name_header', $git_name );
+            include_once MY_GITHUB_INCLUDE_PATH . '/templates/my_github_all_events.php';
+        }
+    }
+
 }

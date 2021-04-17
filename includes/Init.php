@@ -28,12 +28,12 @@ class Init {
      * @return void
      */
     public static function register() {
+        new Assets();
         if ( is_admin() ) {
             new Menu();
             new Settings();
             new Transient();
         } else {
-            new Assets();
             new Shortcode();
         }
     }

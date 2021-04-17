@@ -113,9 +113,7 @@ use My\GitHub\Transient;
 					$repos_url = Transient::get_my_github_details( $body->repos_url );
 					if ( ! empty( $repos_url ) ) {
 						echo '<ol>';
-						foreach ( $repos_url
-
-						as $repos ) {
+						foreach ( $repos_url as $repos ) {
 							?>
                 <li>
                     <a class="text-decoration-none" href="<?php echo esc_url( $repos->html_url ); ?>" target="_blank">
