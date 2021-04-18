@@ -106,13 +106,27 @@ use My\GitHub\Transient;
         </div>
         <div class="pure-u-3-4">
             <div class="plugin-demo-content-border">
-                <b>Public Repositories: <?php echo esc_html( $body->public_repos ); ?></b>
-                <hr />
                 <?php
                 if ( isset( $my_github_details['is_show_my_github_public_repos'] ) ) {
-					$repos_url = Transient::get_my_github_details( $body->repos_url );
+					$url = $body->repos_url;
+					if ( isset( $_GET['repo_page'] ) ) {
+						$url = $body->repos_url . '?page=' . $_GET['repo_page'];
+					}
+					$repos_url = Transient::get_my_github_details( $url );
+					$showing   = '1-' . count( $repos_url ) . ' Public Repositories';
+
+					$ol_start = '1';
+					if ( isset( $_GET['repo_page'] ) ) {
+						$showing  = ( ( $_GET['repo_page'] - 1 ) * 30 ) + 1 . '-' . ( count( $repos_url ) + ( ( $_GET['repo_page'] - 1 ) * 30 ) ) . ' Public Repositories';
+						$ol_start = ( ( $_GET['repo_page'] - 1 ) * 30 ) + 1;
+					}
+					?>
+                <span class="small"> Showing <?php echo esc_html( $showing ); ?></span> of total
+                <b> <?php echo esc_html( $body->public_repos ); ?></b>
+                <hr />
+					<?php
 					if ( ! empty( $repos_url ) ) {
-						echo '<ol>';
+						echo '<ol start=' . $ol_start . '>';
 						foreach ( $repos_url as $repos ) {
 							?>
                 <li>
@@ -142,7 +156,31 @@ use My\GitHub\Transient;
 							echo '</li><hr/>';
 						}
 						echo '</ol>';
+						$count_repos = count( $repos_url );
+						if ( $body->public_repos > $count_repos ) {
+							$total_pages = ceil( $body->public_repos / 30 );
+							$pre_page    = '<a href="#" class="previous">&laquo; Previous</a>';
+							$next_page   = '<a href=' . get_permalink() . '?repo_page=2' . ' class="next">Next &raquo;</a>';
+							if ( isset( $_GET['repo_page'] ) ) {
+								$pre_page = '<a href=' . get_permalink() . '?repo_page=' . ( $_GET['repo_page'] - 1 )
+                                        . ' class="next">&laquo; Previous</a>';
+								if ( $_GET['repo_page'] == 2 ) {
+									$pre_page = '<a href=' . get_permalink() . ' class="next">&laquo; Previous</a>';
+								}
+
+								$next_page = '<a href=' . get_permalink() . '?repo_page=' . ( $_GET['repo_page'] + 1 )
+                                         . ' class="next">Next &raquo;</a>';
+								if ( $_GET['repo_page'] == $total_pages ) {
+									$next_page = '';
+								}
+							} else {
+								$pre_page = '';
+							}
+							echo $pre_page . ' ' . $next_page;
+						}
                     }
+				} else {
+                    echo "<h4>Repositories are disallowed by the user.</h4>";
 				}
 				?>
             </div>
