@@ -110,10 +110,17 @@ use My\GitHub\Transient;
                 if ( isset( $my_github_details['is_show_my_github_public_repos'] ) ) {
 					$url = $body->repos_url;
 					if ( isset( $_GET['repo_page'] ) ) {
+                        $nonce = $_GET['_wpnonce'];
+                        if ( ! wp_verify_nonce( $nonce, 'my_repo_page_nonce' ) ) {
+                            die( esc_html__( 'Security check failed!', 'my-github' ) );
+                        }
 						$url = $body->repos_url . '?page=' . $_GET['repo_page'];
 					}
 					$repos_url = Transient::get_my_github_details( $url );
-					$showing   = '1-' . count( $repos_url ) . ' Public Repositories';
+					if ( empty( $repos_url ) ) {
+					    return false;
+                    }
+					$showing = '1-' . count( $repos_url ) . ' Public Repositories';
 
 					$ol_start = '1';
 					if ( isset( $_GET['repo_page'] ) ) {
@@ -126,7 +133,7 @@ use My\GitHub\Transient;
                 <hr />
 					<?php
 					if ( ! empty( $repos_url ) ) {
-						echo '<ol start=' . $ol_start . '>';
+						echo '<ol start=' . esc_attr( $ol_start ) . '>';
 						foreach ( $repos_url as $repos ) {
 							?>
                 <li>
@@ -147,7 +154,7 @@ use My\GitHub\Transient;
                             <div class="font-medium">Language used</div>
 									<?php
 									foreach ( $language as $key => $item ) {
-										echo "<span> {$key}</span> {$item} bytes<br/>";
+										echo '<span>' . esc_html( $key ) . '</span> ' . esc_html( $item ) . ' bytes<br/>';
 									}
 								}
 								?>
@@ -159,18 +166,16 @@ use My\GitHub\Transient;
 						$count_repos = count( $repos_url );
 						if ( $body->public_repos > $count_repos ) {
 							$total_pages = ceil( $body->public_repos / 30 );
-							$pre_page    = '<a href="#" class="previous">&laquo; Previous</a>';
-							$next_page   = '<a href=' . get_permalink() . '?repo_page=2' . ' class="next">Next &raquo;</a>';
+                            $nonce       = wp_create_nonce( 'my_repo_page_nonce' );
+							$next_page   = '<a href=' . get_permalink() . '?repo_page=2' . '&_wpnonce=' . $nonce . '>Next &raquo;</a>';
 							if ( isset( $_GET['repo_page'] ) ) {
-								$pre_page = '<a href=' . get_permalink() . '?repo_page=' . ( $_GET['repo_page'] - 1 )
-                                        . ' class="next">&laquo; Previous</a>';
-								if ( $_GET['repo_page'] == 2 ) {
-									$pre_page = '<a href=' . get_permalink() . ' class="next">&laquo; Previous</a>';
+								$pre_page = '<a href=' . get_permalink() . '?repo_page=' . ( $_GET['repo_page'] - 1 ) . '&_wpnonce=' . $nonce . '>&laquo; Previous</a>';
+								if ( 2 <= $_GET['repo_page'] ) {
+									$pre_page = '<a href=' . get_permalink() . '>&laquo; Previous</a>';
 								}
 
-								$next_page = '<a href=' . get_permalink() . '?repo_page=' . ( $_GET['repo_page'] + 1 )
-                                         . ' class="next">Next &raquo;</a>';
-								if ( $_GET['repo_page'] == $total_pages ) {
+								$next_page = '<a href=' . get_permalink() . '?repo_page=' . ( $_GET['repo_page'] + 1 ) . '&_wpnonce=' . $nonce . '>Next &raquo;</a>';
+								if ( $_GET['repo_page'] >= $total_pages ) {
 									$next_page = '';
 								}
 							} else {
@@ -180,7 +185,7 @@ use My\GitHub\Transient;
 						}
                     }
 				} else {
-                    echo "<h4>Repositories are disallowed by the user.</h4>";
+                    echo '<h4>Repositories are disallowed by the user.</h4>';
 				}
 				?>
             </div>
