@@ -23,7 +23,7 @@ use My\GitHub\Transient;
             <div class="plugin-side-options">
                 <img class="avatar-image-circle" src="<?php echo esc_url( $body->avatar_url ); ?>" alt="<?php echo esc_attr( $body->name ); ?>">
                 <h5>
-                    <a href="<?php echo esc_url( $body->html_url ); ?>" target="_blank"><?php echo esc_html( $body->name ); ?></a>
+                    <a class="text-decoration-none" href="<?php echo esc_url( $body->html_url ); ?>" target="_blank"><?php echo esc_html( $body->name ); ?></a>
                 </h5>
                 <b class="small"><?php echo esc_html( $body->bio ); ?></b>
                 <hr />
