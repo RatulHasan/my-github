@@ -4,7 +4,7 @@ Tags: github, github's profile, github's events,
 Requires at least: 5.2
 Tested up to: 5.7.1
 Requires PHP: 5.6
-Stable tag: 1.0.1
+Stable tag: 1.0.0
 License: PL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 
@@ -18,16 +18,7 @@ You can also find Quick Tags in your editor. You can also setup your settings fr
 == Installation ==
 Installation is fairly straight forward. Install it from the WordPress plugin repository.
 
-== Changelog ==
-= 1.0.1 =
-* Add main language used to all repository.
-* Add star count.
-* Add watchers count.
-* Add forks count.
-* Add license to all repository.
 = 1.0.0 =
 * Initial Release
 
-== Upgrade Notice ==
-Add main language used, stargazers count, watchers count, forks count, license to all repository.
 
