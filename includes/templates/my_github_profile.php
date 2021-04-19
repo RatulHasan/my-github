@@ -110,8 +110,7 @@ use My\GitHub\Transient;
                 if ( isset( $my_github_details['is_show_my_github_public_repos'] ) ) {
 					$url = $body->repos_url;
 					if ( isset( $_GET['repo_page'] ) ) {
-                        $nonce = $_GET['_wpnonce'];
-                        if ( ! wp_verify_nonce( $nonce, 'my_repo_page_nonce' ) ) {
+                        if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'my_repo_page_nonce' ) ) {
                             die( esc_html__( 'Security check failed!', 'my-github' ) );
                         }
 						$url = $body->repos_url . '?page=' . $_GET['repo_page'];
@@ -132,7 +131,10 @@ use My\GitHub\Transient;
                 <b> <?php echo esc_html( $body->public_repos ); ?></b>
                 <hr />
 					<?php
-					if ( ! empty( $repos_url ) ) {
+					if (  empty( $repos_url ) ) {
+                        echo '<h4>Repositories are disallowed by the user.</h4>';
+                        return false;
+                    }
 						echo '<ol start=' . esc_attr( $ol_start ) . '>';
 						foreach ( $repos_url as $repos ) {
 							?>
@@ -192,7 +194,7 @@ use My\GitHub\Transient;
 						if ( $body->public_repos > $count_repos ) {
 							$total_pages = ceil( $body->public_repos / 30 );
                             $nonce       = wp_create_nonce( 'my_repo_page_nonce' );
-							$next_page   = '<a href=' . get_permalink() . '?repo_page=2' . '&_wpnonce=' . $nonce . '>Next &raquo;</a>';
+							$next_page   = '<a href=' . get_permalink() . '?repo_page=2&_wpnonce=' . $nonce . '>Next &raquo;</a>';
 							if ( isset( $_GET['repo_page'] ) ) {
 								$pre_page = '<a href=' . get_permalink() . '?repo_page=' . ( $_GET['repo_page'] - 1 ) . '&_wpnonce=' . $nonce . '>&laquo; Previous</a>';
 								if ( 2 <= $_GET['repo_page'] ) {
@@ -206,12 +208,26 @@ use My\GitHub\Transient;
 							} else {
 								$pre_page = '';
 							}
-							echo $pre_page . ' ' . $next_page;
+							echo wp_kses(
+                                $pre_page,
+                                array(
+									'a' => array(
+										'href'  => array(),
+										'title' => array(),
+									),
+                                )
+                            );
+							echo wp_kses(
+                                $next_page,
+                                array(
+									'a' => array(
+										'href'  => array(),
+										'title' => array(),
+									),
+                                )
+                            );
 						}
                     }
-				} else {
-                    echo '<h4>Repositories are disallowed by the user.</h4>';
-				}
 				?>
             </div>
         </div>

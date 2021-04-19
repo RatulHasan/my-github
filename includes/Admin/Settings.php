@@ -90,7 +90,7 @@ class Settings {
                     'label_for' => 'my_github_username',
                     'name'      => 'my_github_details[my_github_username]',
                     'type'      => 'text',
-                    'value'     => isset( $my_github_details['my_github_username'] ) ? $my_github_details['my_github_username'] : '',
+                    'value'     => isset( $my_github_details['my_github_username'] ) ? esc_attr( $my_github_details['my_github_username'] ) : '',
                 ),
             ),
             array(
@@ -104,7 +104,7 @@ class Settings {
                     'name'      => 'my_github_details[is_show_followers]',
                     'type'      => 'checkbox',
                     'value'     => 1,
-                    'selected'  => isset( $my_github_details['is_show_followers'] ),
+                    'selected'  => isset( $my_github_details['is_show_followers'] ) ? esc_attr( $my_github_details['is_show_followers'] ) : '',
                 ),
             ),
             array(
@@ -118,7 +118,7 @@ class Settings {
                     'name'      => 'my_github_details[is_show_following]',
                     'type'      => 'checkbox',
                     'value'     => 1,
-                    'selected'  => isset( $my_github_details['is_show_following'] ),
+                    'selected'  => isset( $my_github_details['is_show_following'] ) ? esc_attr( $my_github_details['is_show_following'] ) : '',
                 ),
             ),
             array(
@@ -132,7 +132,7 @@ class Settings {
                     'name'      => 'my_github_details[is_show_company]',
                     'type'      => 'checkbox',
                     'value'     => 1,
-                    'selected'  => isset( $my_github_details['is_show_company'] ),
+                    'selected'  => isset( $my_github_details['is_show_company'] ) ? esc_attr( $my_github_details['is_show_company'] ) : '',
                 ),
             ),
             array(
@@ -146,7 +146,7 @@ class Settings {
                     'name'      => 'my_github_details[is_show_location]',
                     'type'      => 'checkbox',
                     'value'     => 1,
-                    'selected'  => isset( $my_github_details['is_show_location'] ),
+                    'selected'  => isset( $my_github_details['is_show_location'] ) ? esc_attr( $my_github_details['is_show_location'] ) : '',
                 ),
             ),
             array(
@@ -160,7 +160,7 @@ class Settings {
                     'name'      => 'my_github_details[is_show_email]',
                     'type'      => 'checkbox',
                     'value'     => 1,
-                    'selected'  => isset( $my_github_details['is_show_email'] ),
+                    'selected'  => isset( $my_github_details['is_show_email'] ) ? esc_attr( $my_github_details['is_show_email'] ) : '',
                 ),
             ),
             array(
@@ -174,7 +174,7 @@ class Settings {
                     'name'      => 'my_github_details[is_show_blog]',
                     'type'      => 'checkbox',
                     'value'     => 1,
-                    'selected'  => isset( $my_github_details['is_show_blog'] ),
+                    'selected'  => isset( $my_github_details['is_show_blog'] ) ? esc_attr( $my_github_details['is_show_blog'] ) : '',
                 ),
             ),
             array(
@@ -188,7 +188,7 @@ class Settings {
                     'name'      => 'my_github_details[is_show_twitter]',
                     'type'      => 'checkbox',
                     'value'     => 1,
-                    'selected'  => isset( $my_github_details['is_show_twitter'] ),
+                    'selected'  => isset( $my_github_details['is_show_twitter'] ) ? esc_attr( $my_github_details['is_show_twitter'] ) : '',
                 ),
             ),
             array(
@@ -202,7 +202,7 @@ class Settings {
                     'name'      => 'my_github_details[is_show_my_github_public_repos]',
                     'type'      => 'checkbox',
                     'value'     => 1,
-                    'selected'  => isset( $my_github_details['is_show_my_github_public_repos'] ),
+                    'selected'  => isset( $my_github_details['is_show_my_github_public_repos'] ) ? esc_attr( $my_github_details['is_show_my_github_public_repos'] ) : '',
                 ),
             ),
             array(
@@ -216,7 +216,7 @@ class Settings {
                     'name'      => 'my_github_details[is_show_my_github_repos_language]',
                     'type'      => 'checkbox',
                     'value'     => 1,
-                    'selected'  => isset( $my_github_details['is_show_my_github_repos_language'] ),
+                    'selected'  => isset( $my_github_details['is_show_my_github_repos_language'] ) ? esc_attr( $my_github_details['is_show_my_github_repos_language'] ) : '',
                 ),
             ),
         );
@@ -289,6 +289,7 @@ class Settings {
             'url',
         );
 
+        $global_input = '<input id="' . $args['label_for'] . '" type="' . $args['type'] . '" class="regular-text" name="' . $args['name'] . '" value="' . $args['value'] . '" placeholder="Write GitHub username">';
         if ( in_array( $args['type'], $input_type, true ) ) {
             $type = 'global_input';
         }
@@ -322,26 +323,33 @@ class Settings {
             }
             $select .= '</select>';
         }
-
         switch ( $type ) {
-            case 'global_input':
-                echo '<input id="' . $args['label_for'] . '" type="' . $args['type'] . '" class="regular-text" name="' . $args['name']
-                     . '" value="' . $args['value'] . '" placeholder="Write GitHub username">';
-                break;
-            case 'radio':
-                echo $radio;
-                break;
             case 'checkbox':
-                echo $checkbox;
-                break;
-            case 'select':
-                echo $select;
-                break;
-            case 'textarea':
-                echo "<textarea name='{$args['name']}' rows='4' cols='50'>{$args['value']}</textarea>";
+                echo wp_kses(
+                    $checkbox,
+                    array(
+                        'input' => array(
+                            'id'      => array( $args['label_for'] ),
+                            'type'    => array( ' checkbox' ),
+                            'name'    => array( $args['name'] ),
+                            'value'   => array( $args['value'] ),
+                            'checked' => array( $args['selected'] ),
+                        ),
+                    )
+                );
                 break;
             default:
-                echo "<input type='{$args['type']}' name='{$args['name']}' placeholder='{$args['placeholder']}'></br>";
+                echo wp_kses(
+                    $global_input,
+                    array(
+                        'input' => array(
+                            'id'    => array( $args['label_for'] ),
+                            'type'  => array( ' checkbox' ),
+                            'name'  => array( $args['name'] ),
+                            'value' => array( $args['value'] ),
+                        ),
+                    )
+                );
                 break;
         }
     }

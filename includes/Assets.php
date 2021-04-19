@@ -70,8 +70,8 @@ class Assets {
             wp_register_style( $handle, $style['src'], $style['deps'], $style['ver'] );
         }
         wp_enqueue_style( 'my-github-styles' );
-        wp_enqueue_style( 'pure-grid-css', '//unpkg.com/purecss@1.0.1/build/grids-min.css' );
-        wp_enqueue_style( 'font-awesome-css', '//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css' );
+        wp_enqueue_style( 'pure-grid-css' );
+        wp_enqueue_style( 'font-awesome-css' );
     }
 
     /**
@@ -85,6 +85,16 @@ class Assets {
                 'src'  => MY_GITHUB_ASSETS . '/my_github.min.css',
                 'deps' => array(),
                 'ver'  => filemtime( MY_GITHUB_BASE_PATH . '/assets/my_github.min.css' ),
+            ),
+            'pure-grid-css'    => array(
+                'src'  => MY_GITHUB_ASSETS . '/grids-min.css',
+                'deps' => array(),
+                'ver'  => filemtime( MY_GITHUB_BASE_PATH . '/assets/grids-min.css' ),
+            ),
+            'font-awesome-css' => array(
+                'src'  => MY_GITHUB_ASSETS . '/font-awesome-min.css',
+                'deps' => array(),
+                'ver'  => filemtime( MY_GITHUB_BASE_PATH . '/assets/font-awesome-min.css' ),
             ),
         );
     }

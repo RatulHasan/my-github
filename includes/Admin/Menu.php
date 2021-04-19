@@ -61,6 +61,14 @@ class Menu {
      */
     public function add_settings_links( array $links ) {
         $settings_links = "<a href='options-general.php?page=my-github'>Settings</a>";
+        $settings_links = wp_kses(
+            $settings_links,
+            array(
+                'a' => array(
+                    'href' => array(),
+                ),
+            )
+        );
         array_push( $links, $settings_links );
 
         return $links;
