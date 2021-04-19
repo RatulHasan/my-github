@@ -147,11 +147,11 @@ use My\GitHub\Transient;
 							$is_ml = '';
 							echo '<div>';
                             if ( $repos->language ) {
-                                echo ' <span class="dot"></span> ' . esc_attr( $repos->language );
+                                echo '<span class="dot"></span> ' . esc_attr( $repos->language );
                                 $is_ml = 'ml-25';
                             }
 							if ( $repos->stargazers_count ) {
-								echo ' <i class="far fa-star ' . esc_attr( $is_ml ) . '"></i> ' . esc_attr( $repos->stargazers_count );
+								echo '<i class="far fa-star ' . esc_attr( $is_ml ) . '"></i> ' . esc_attr( $repos->stargazers_count );
                                 $is_ml = 'ml-25';
 							}
 							if ( $repos->watchers_count ) {
@@ -159,11 +159,11 @@ use My\GitHub\Transient;
                                 $is_ml = 'ml-25';
 							}
 							if ( $repos->forks_count ) {
-								echo '<i class="fas fa-code-branch ' . esc_attr( $is_ml ) . '"></i>' . esc_attr( $repos->forks_count );
+								echo '<i class="fas fa-code-branch ' . esc_attr( $is_ml ) . '"></i> ' . esc_attr( $repos->forks_count );
                                 $is_ml = 'ml-25';
 							}
 							if ( $repos->license ) {
-								echo '<i class="fas fa-balance-scale ' . esc_attr( $is_ml ) . '""></i> <a class="text-decoration-none" target="_blank" href=' . esc_attr( $repos->license->url ) . '>' . esc_attr( $repos->license->name ) . '</a>';
+								echo '<i class="fas fa-balance-scale ' . esc_attr( $is_ml ) . '"></i> ' . esc_attr( $repos->license->name );
 							}
 							echo '</div>';
 							if ( $repos->description ) {
