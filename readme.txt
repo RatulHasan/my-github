@@ -19,11 +19,15 @@ You can also find Quick Tags in your editor. You can also setup your settings fr
 Installation is fairly straight forward. Install it from the WordPress plugin repository.
 
 == Changelog ==
-1.0.1
-1.0.0
+= 1.0.1 =
+* Add main language used to all repository.
+* Add star count.
+* Add watchers count.
+* Add forks count.
+* Add license to all repository.
+= 1.0.0 =
+* Initial Release
 
 == Upgrade Notice ==
 Add main language used, stargazers count, watchers count, forks count, license to all repository.
 
-= 1.0.0 =
-* Initial Release
