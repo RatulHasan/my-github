@@ -144,6 +144,26 @@ use My\GitHub\Transient;
 							if ( $repos->fork ) {
 								echo ' (Forked)';
 							}
+							echo '<div>';
+                            if ( $repos->language ) {
+                                echo ' <span class="dot"></span> ' . esc_attr( $repos->language );
+                            }
+							if ( $repos->stargazers_count ) {
+								echo ' <i class="far fa-star ml-25"></i> ' . esc_attr( $repos->stargazers_count );
+							}
+							if ( $repos->watchers_count ) {
+								echo ' <i class="far fa-eye ml-25"></i> ' . esc_attr( $repos->watchers_count );
+							}
+							if ( $repos->forks_count ) {
+								echo '<i class="fas fa-code-branch ml-25"></i>' . esc_attr( $repos->forks_count );
+							}
+							if ( $repos->license ) {
+								echo '<i class="fas fa-balance-scale ml-25""></i> <a class="text-decoration-none" target="_blank" href=' . esc_attr( $repos->license->url ) . '>' . esc_attr( $repos->license->name ) . '</a>';
+							}
+							echo '</div>';
+							if ( $repos->description ) {
+								echo '<div>' . esc_attr( $repos->description ) . '</div>';
+							}
 
 							if ( isset( $my_github_details['is_show_my_github_repos_language'] ) ) {
 								$language_url = 'https://api.github.com/repos/' . esc_html( $body->login ) . '/' . esc_html( $repos->name )
