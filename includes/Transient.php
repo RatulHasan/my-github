@@ -58,7 +58,7 @@ class Transient {
         $body = get_transient( 'my_github_root' );
         if ( ! $body ) {
             $username = Transient::admin_my_github_details();
-            $response = wp_remote_get( "https://api.github.com/users/{$username['my_github_username']}" );
+            $response = wp_remote_get( esc_url_raw( "https://api.github.com/users/{$username['my_github_username']}" ) );
             $body     = wp_remote_retrieve_body( $response );
             $body     = json_decode( $body );
 
@@ -67,28 +67,6 @@ class Transient {
                 $body          = "Something went wrong: $error_message";
             } else {
                 set_transient( 'my_github_root', $body, HOUR_IN_SECONDS );
-            }
-        }
-        return $body;
-    }
-
-    /**
-     * Get all github events
-     *
-     * @return mixed|string
-     */
-    public static function get_github_all_events() {
-        $body = get_transient( 'my_github_all_events' );
-        if ( ! $body ) {
-            $response = wp_remote_get( 'https://api.github.com/events' );
-            $body     = wp_remote_retrieve_body( $response );
-            $body     = json_decode( $body );
-
-            if ( is_wp_error( $response ) ) {
-                $error_message = $response->get_error_message();
-                $body          = "Something went wrong: $error_message";
-            } else {
-                set_transient( 'my_github_all_events', $body, HOUR_IN_SECONDS / 20 );
             }
         }
         return $body;
@@ -108,7 +86,7 @@ class Transient {
             if ( ! $url ) {
                 return false;
             }
-            $response      = wp_remote_get( "$url" );
+            $response      = wp_remote_get( esc_url_raw( "$url" ) );
             $response_code = wp_remote_retrieve_response_code( $response );
 
             if ( 200 === $response_code ) {
