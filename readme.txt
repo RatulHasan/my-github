@@ -1,6 +1,6 @@
 === My Github ===
 Contributors: ratulhasan
-Tags: github, github's profile, github's events,
+Tags: github, github profile, portfolio,
 Requires at least: 5.2
 Tested up to: 5.7.1
 Requires PHP: 5.6
