@@ -108,12 +108,12 @@ use My\GitHub\Transient;
             <div class="plugin-demo-content-border">
                 <?php
                 if ( isset( $my_github_details['is_show_my_github_public_repos'] ) ) {
-					$url = $body->repos_url;
+					$url = $body->repos_url . '?sort=pushed_at&order=desc';
 					if ( isset( $_GET['repo_page'] ) ) {
                         if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'my_repo_page_nonce' ) ) {
                             die( esc_html__( 'Security check failed!', 'my-github' ) );
                         }
-						$url = $body->repos_url . '?page=' . $_GET['repo_page'];
+						$url = $body->repos_url . '?sort=pushed_at&order=desc&page=' . $_GET['repo_page'];
 					}
                     $url = esc_url_raw( $url );
 					$repos_url = Transient::get_my_github_details( $url );
