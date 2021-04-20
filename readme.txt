@@ -8,7 +8,7 @@ Stable tag: 1.0.0
 License: PL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 
-A simple and nice WordPress plugin that can track your github's profile and github's public events.
+A simple and nice WordPress plugin that can track your github's profile.
 
 == Description ==
 A simple and nice WordPress plugin that can track your GitHub's profile. You can showcase your Followers, Following, Company, Location, Blog URL, Twitter Account, Public Repositories, Public Repository's Used Language.
