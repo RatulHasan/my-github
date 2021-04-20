@@ -115,6 +115,7 @@ use My\GitHub\Transient;
                         }
 						$url = $body->repos_url . '?page=' . $_GET['repo_page'];
 					}
+                    $url = esc_url_raw( $url );
 					$repos_url = Transient::get_my_github_details( $url );
 					if ( empty( $repos_url ) ) {
 					    return false;
@@ -166,6 +167,10 @@ use My\GitHub\Transient;
 							}
 							if ( $repos->license ) {
 								echo '<i class="fas fa-balance-scale ' . esc_attr( $is_ml ) . '"></i> ' . esc_attr( $repos->license->name );
+                                $is_ml = 'ml-25';
+                            }
+							if ( $repos->pushed_at ) {
+								echo '<span class="' . esc_attr( $is_ml ) . '"><i class="far fa-clock"></i> Updated '. human_time_diff(strtotime( $repos->pushed_at ) ) .' ago</span> ';
 							}
 							echo '</div>';
 							if ( $repos->description ) {
@@ -194,14 +199,14 @@ use My\GitHub\Transient;
 						if ( $body->public_repos > $count_repos ) {
 							$total_pages = ceil( $body->public_repos / 30 );
                             $nonce       = wp_create_nonce( 'my_repo_page_nonce' );
-							$next_page   = '<a href=' . get_permalink() . '?repo_page=2&_wpnonce=' . $nonce . '>Next &raquo;</a>';
+							$next_page   = '<a class="ml-25" href=' . get_permalink() . '?repo_page=2&_wpnonce=' . $nonce . '>Next &raquo;</a>';
 							if ( isset( $_GET['repo_page'] ) ) {
-								$pre_page = '<a href=' . get_permalink() . '?repo_page=' . ( $_GET['repo_page'] - 1 ) . '&_wpnonce=' . $nonce . '>&laquo; Previous</a>';
+								$pre_page = '<a href=' . get_permalink() . '?repo_page=' . ( $_GET['repo_page'] - 1 ) . '&_wpnonce=' . $nonce . '>&laquo; Previous</a> ';
 								if ( 2 <= $_GET['repo_page'] ) {
-									$pre_page = '<a href=' . get_permalink() . '>&laquo; Previous</a>';
+									$pre_page = '<a href=' . get_permalink() . '>&laquo; Previous</a> ';
 								}
 
-								$next_page = '<a href=' . get_permalink() . '?repo_page=' . ( $_GET['repo_page'] + 1 ) . '&_wpnonce=' . $nonce . '>Next &raquo;</a>';
+								$next_page = '<a class="ml-25" href=' . get_permalink() . '?repo_page=' . ( $_GET['repo_page'] + 1 ) . '&_wpnonce=' . $nonce . '>Next &raquo;</a>';
 								if ( $_GET['repo_page'] >= $total_pages ) {
 									$next_page = '';
 								}
@@ -223,6 +228,7 @@ use My\GitHub\Transient;
 									'a' => array(
 										'href'  => array(),
 										'title' => array(),
+                                        'class' => array(),
 									),
                                 )
                             );
