@@ -4,7 +4,7 @@ Tags: github, profile, portfolio, developer, development, embed, oembed
 Requires at least: 5.2
 Tested up to: 5.7.1
 Requires PHP: 5.6
-Stable tag: 1.1.0
+Stable tag: trunk
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 
