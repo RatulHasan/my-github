@@ -46,7 +46,7 @@ Please give us feedback, contribute and file technical bugs on [GitHub Repo](htt
 == Frequently Asked Questions ==
 
 = Can I change the layout? =
-Not yet, we're trying to add custom templating - [GitHub Repo](https://github.com/RatulHasan/my-github)!
+Not yet, we're trying to add custom templating - [Contribute](https://github.com/RatulHasan/my-github)!
 
 == Changelog ==
 = 1.1.0 =
