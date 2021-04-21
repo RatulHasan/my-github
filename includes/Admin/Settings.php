@@ -58,7 +58,7 @@ class Settings {
             array(
                 'id'       => 'my_github_section',
                 'title'    => __( 'GitHub Settings', 'my-github' ),
-                'callback' => '',
+                'callback' => array( $this, 'cb_section_hints' ),
                 'page'     => 'my-github',
             ),
             array(
@@ -95,7 +95,7 @@ class Settings {
             ),
             array(
                 'id'       => 'my_github_access_token',
-                'title'    => __( 'GitHub Access Token', 'my-github' ),
+                'title'    => __( 'Personal Access Token', 'my-github' ),
                 'callback' => array( $this, 'cb_my_github_input' ),
                 'page'     => 'my-github',
                 'section'  => 'my_github_section',
@@ -237,6 +237,22 @@ class Settings {
         $this->register_custom_fields( $this->sections, $this->fields, $this->register_setting );
     }
 
+    /**
+     * Callback for section hints
+     *
+     * @return void
+     */
+    public function cb_section_hints() {
+        $string = __( 'Don\'t have any Personal Access Token?', 'my-github' ) . ' <a href="https://github.com/settings/tokens" target="_blank">' . __( 'Create one?', 'my-github' ) . '</a>';
+        echo wp_kses(
+            $string,
+            array(
+				'a' => array(
+					'href' => array(),
+				),
+            )
+        );
+	}
     /**
      * Register and Initialize custom fields in a section
      *
