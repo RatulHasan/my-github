@@ -54,7 +54,7 @@ class Assets {
             'my-github-scripts' => array(
                 'src'  => MY_GITHUB_ASSETS . '/my_github_qtags.js',
                 'deps' => array( 'quicktags' ),
-                'ver'  => filemtime( MY_GITHUB_BASE_PATH . '/assets/my_github_qtags.js' ),
+                'ver'  => MY_GITHUB_VERSION,
             ),
         );
     }
@@ -84,17 +84,17 @@ class Assets {
             'my-github-styles'    => array(
                 'src'  => MY_GITHUB_ASSETS . '/my_github.min.css',
                 'deps' => array(),
-                'ver'  => filemtime( MY_GITHUB_BASE_PATH . '/assets/my_github.min.css' ),
+                'ver'  => MY_GITHUB_VERSION,
             ),
             'my-pure-grid-css'    => array(
                 'src'  => MY_GITHUB_ASSETS . '/grids-min.css',
                 'deps' => array(),
-                'ver'  => filemtime( MY_GITHUB_BASE_PATH . '/assets/grids-min.css' ),
+                'ver'  => MY_GITHUB_VERSION,
             ),
             'my-font-awesome-css' => array(
                 'src'  => MY_GITHUB_ASSETS . '/fontawesome-free-5.15.3/css/all.min.css',
                 'deps' => array(),
-                'ver'  => filemtime( MY_GITHUB_BASE_PATH . '/assets/fontawesome-free-5.15.3/css/all.min.css' ),
+                'ver'  => MY_GITHUB_VERSION,
             ),
         );
     }

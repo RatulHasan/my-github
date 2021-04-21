@@ -62,7 +62,7 @@ class Transient {
             if ( isset( $username['my_github_access_token'] ) && ! empty( $username['my_github_access_token'] ) ) {
                 $url      = 'https://api.github.com/user';
                 $args     = array(
-                    'timeout' => 20,
+                    'timeout' => 30,
                     'headers' => array(
                         'Authorization' => 'token ' . esc_attr( $username['my_github_access_token'] ),
                     ),
@@ -70,7 +70,7 @@ class Transient {
                 $response = wp_remote_get( $url, $args );
             } else {
                 $args     = array(
-                    'timeout' => 20,
+                    'timeout' => 30,
                 );
                 $response = wp_remote_get( esc_url_raw( "https://api.github.com/users/{$username['my_github_username']}" ), $args );
             }
@@ -113,7 +113,7 @@ class Transient {
 
             $username = Transient::admin_my_github_details();
             $args     = array(
-                'timeout' => 20,
+                'timeout' => 30,
             );
             if ( isset( $username['my_github_access_token'] ) && ! empty( $username['my_github_access_token'] ) ) {
                 $args = array(
