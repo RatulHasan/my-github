@@ -1,4 +1,7 @@
 === My Github ===
+Plugin Name: My Github
+Version: 1.1.0
+Author: Ratul Hasan
 Contributors: ratulhasan
 Tags: github, profile, portfolio, developer, development, embed, oembed
 Requires at least: 5.2
