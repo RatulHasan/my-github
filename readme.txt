@@ -34,8 +34,8 @@ Developers can also add their custom header name by using the hook `git_name_hea
         return "My Github Showcase";
     });
     ``
-The plugin provides very basic styling. If anyone has some ideas for a better styling - pull requests welcome!
-The main development is all going on on [GitHub Repo](https://github.com/RatulHasan/my-github).
+The plugin provides very basic styling. If anyone has any ideas for a better styling - pull requests are welcome!
+The development repo is [GitHub Repo](https://github.com/RatulHasan/my-github).
 
 == Installation ==
 Installation is fairly straight forward. Install it from the WordPress plugin repository.
