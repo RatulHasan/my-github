@@ -94,6 +94,19 @@ class Settings {
                 ),
             ),
             array(
+                'id'       => 'my_github_access_token',
+                'title'    => __( 'GitHub Access Token', 'my-github' ),
+                'callback' => array( $this, 'cb_my_github_input' ),
+                'page'     => 'my-github',
+                'section'  => 'my_github_section',
+                'args'     => array(
+                    'label_for' => 'my_github_access_token',
+                    'name'      => 'my_github_details[my_github_access_token]',
+                    'type'      => 'text',
+                    'value'     => isset( $my_github_details['my_github_access_token'] ) ? esc_attr( $my_github_details['my_github_access_token'] ) : '',
+                ),
+            ),
+            array(
                 'id'       => 'is_show_my_github_followers',
                 'title'    => __( 'Show Followers', 'my-github' ),
                 'callback' => array( $this, 'cb_my_github_input' ),
