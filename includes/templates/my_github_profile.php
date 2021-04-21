@@ -15,7 +15,7 @@ use My\GitHub\Transient;
 <div class="wrap">
     <h1 class="text_center">
         <?php
-        echo $git_name;
+        echo esc_html( $git_name );
         ?>
     </h1>
     <div class="pure-g">
