@@ -58,7 +58,7 @@ class Settings {
             array(
                 'id'       => 'my_github_section',
                 'title'    => __( 'GitHub Settings', 'my-github' ),
-                'callback' => array( $this, 'cb_section_hints' ),
+                'callback' => '',
                 'page'     => 'my-github',
             ),
             array(
@@ -103,7 +103,8 @@ class Settings {
                     'label_for' => 'my_github_access_token',
                     'name'      => 'my_github_details[my_github_access_token]',
                     'type'      => 'text',
-                    'value'     => isset( $my_github_details['my_github_access_token'] ) ? esc_attr( $my_github_details['my_github_access_token'] ) : '',
+                    'link'      => __( 'Don\'t have any Personal Access Token?', 'my-github' ) . ' <a href="https://github.com/settings/tokens" target="_blank">' . __( 'Create one?', 'my-github' ) . '</a>',
+					'value'     => isset( $my_github_details['my_github_access_token'] ) ? esc_attr( $my_github_details['my_github_access_token'] ) : '',
                 ),
             ),
             array(
@@ -238,22 +239,6 @@ class Settings {
     }
 
     /**
-     * Callback for section hints
-     *
-     * @return void
-     */
-    public function cb_section_hints() {
-        $string = __( 'Don\'t have any Personal Access Token?', 'my-github' ) . ' <a href="https://github.com/settings/tokens" target="_blank">' . __( 'Create one?', 'my-github' ) . '</a>';
-        echo wp_kses(
-            $string,
-            array(
-				'a' => array(
-					'href' => array(),
-				),
-            )
-        );
-	}
-    /**
      * Register and Initialize custom fields in a section
      *
      * @param  array $sections  Data for sections.
@@ -319,6 +304,9 @@ class Settings {
         );
 
         $global_input = '<input id="' . $args['label_for'] . '" type="' . $args['type'] . '" class="regular-text" name="' . $args['name'] . '" value="' . $args['value'] . '" placeholder="Write GitHub username">';
+        if ( isset( $args['link'] ) && ! empty( $args['link'] ) ) {
+            $global_input .= '<p class="description">' . $args['link'] . '</p>';
+        }
         if ( in_array( $args['type'], $input_type, true ) ) {
             $type = 'global_input';
         }
@@ -377,6 +365,10 @@ class Settings {
                             'name'  => array( $args['name'] ),
                             'value' => array( $args['value'] ),
                         ),
+                        'a'     => array(
+                            'href' => array(),
+                        ),
+                        'p'     => array(),
                     )
                 );
                 break;
