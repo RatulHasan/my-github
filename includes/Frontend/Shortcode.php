@@ -25,7 +25,7 @@ class Shortcode {
      *
      * @var Transient $admin_transient
      */
-    public $admin_transient;
+    public Transient $admin_transient;
 
     /**
      * Frontend constructor.

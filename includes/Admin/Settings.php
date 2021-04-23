@@ -25,21 +25,21 @@ class Settings {
      *
      * @var array
      */
-    public $sections = array();
+    public array $sections = array();
 
     /**
      * For registering fields
      *
      * @var array
      */
-    public $register_setting = array();
+    public array $register_setting = array();
 
     /**
      * For storing fields
      *
      * @var array
      */
-    public $fields = array();
+    public array $fields = array();
 
     /**
      * SettingsApi constructor.
