@@ -20,8 +20,6 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit();
 }
 
-require_once __DIR__ . '/includes/Frontend/Widget.php';
-
 /**
  * Class MyGithub
  */
@@ -83,7 +81,6 @@ class MyGithub {
      */
     public function initiate_plugin() {
         \My\GitHub\Init::register();
-        new My\GitHub\Frontend\Widget();
     }
     /**
      * Init method for MyGithub
