@@ -5,6 +5,7 @@ A simple and nice WordPress plugin that can track your GitHub's profile. You can
 If the installation is okay, go  and create a page and/or post or update a page and/or post and insert a Shortcode 👉 [my_github] to show your profile.
 You can also find Quick Tags in your editor. You can also setup your settings from My GitHub under Settings page. That's it.
 * Currently supports:
+    * GitHub Widget Profile View
     * User profiles
     * Repositories
     * Used Main Language
@@ -21,3 +22,12 @@ Developers can also add their custom header name by using the hook `git_name_hea
         return "My Github Showcase";
     });
     ``
+#### Changelog
+= 1.2.0 =
+* Add GitHub Widget Profile View.
+
+= 1.1.0 =
+* Add Personal Access Token to authenticate a user [Token](https://github.com/settings/tokens).
+
+= 1.0.0 =
+* Initial Release
