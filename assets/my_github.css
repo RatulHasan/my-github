@@ -3,18 +3,18 @@
     transition: 0.3s;
     width: 100%;
 }
-.text-decoration-none{
+.text-decoration-none {
     text-decoration: none;
 }
 .small {
     font-size: 14px;
 }
 
-.font-medium{
+.font-medium {
     font-size: 18px;
 }
 
-.font-big{
+.font-big {
     font-size: 22px;
 }
 .color-green {
@@ -28,66 +28,72 @@
     border-radius: 50%;
     padding: 5px 10px;
 }
-.avatar-image-circle{
+.avatar-image-circle {
     border-radius: 50%;
     padding: 5px 10px;
 }
-.events-avatar-image-circle{
+.widget-avatar-image-circle {
+    border-radius: 50%;
+    padding: 5px 10px;
+    width: 120px;
+    margin: 0 auto;
+}
+.events-avatar-image-circle {
     width: 50px;
     border-radius: 50%;
     padding: 5px;
 }
-.mt{
+.mt {
     margin-top: 50px;
 }
 
-.plugin-side-options{
-    background: linear-gradient(to bottom, #EAECEC 0%, white 100%);  /*EAECEC*/
-    min-height:520px;
-    margin-right:5px;
-    padding:10px;
+.plugin-side-options {
+    background: linear-gradient(to bottom, #eaecec 0%, white 100%); /*EAECEC*/
+    min-height: 520px;
+    margin-right: 5px;
+    padding: 10px;
     border-radius: 10px;
 }
-.text_center{
+.text_center {
     text-align: center;
 }
-.plugin-demo-content{
-    background-color:#fff;
-    min-height:520px;
-    margin:0px 10px ;
-    padding:10px 20px;
+.plugin-demo-content {
+    background-color: #fff;
+    min-height: 520px;
+    margin: 0px 10px;
+    padding: 10px 20px;
 }
-.dot{
+.dot {
     height: 10px;
     width: 10px;
     border-radius: 50%;
     display: inline-block;
     background-color: darkorange;
 }
-.plugin-demo-content-border{
-    background-color:#fff;
-    min-height:520px;
-    margin:0px 10px ;
-    padding:10px 20px;
+.plugin-demo-content-border {
+    background-color: #fff;
+    min-height: 520px;
+    margin: 0px 10px;
+    padding: 10px 20px;
     border: 1px solid #f0f3f3;
     border-radius: 10px;
 }
-.ml-25{
+.ml-25 {
     margin-left: 25px;
 }
-.plugin-side-options button{
-    width:100%;
-    padding:10px;
+.plugin-side-options button {
+    width: 100%;
+    padding: 10px;
     font-size: 18px;
     margin-bottom: 10px;
 }
 
-.plugin-result{
-    padding:10px 20px;
+.plugin-result {
+    padding: 10px 20px;
     background-color: #ddd;
     display: none;
 }
 
-.plugin-result-title{
+.plugin-result-title {
     margin-bottom: 15px;
 }
