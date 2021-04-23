@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:         My Github
+ * Plugin Name:         sMy Github
  * Plugin URI:          https://github.com/RatulHasan/my-github
  * Description:         A simple and nice WordPress plugin that can track your github's profile.
  * Version:             1.2.0

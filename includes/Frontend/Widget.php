@@ -26,7 +26,7 @@ class Widget extends \WP_Widget {
         parent::__construct(
             'my-github',
             __( 'My GitHub', 'my-github' ),
-            array( 'description' => __( 'Display your GitHub profile on your sidebar', 'my-github' ) )
+            array( 'description' => __( 'Showcase your GitHub profile.', 'my-github' ) )
         );
 
         add_action( 'widgets_init', array( $this, 'register_github_widget' ) );
