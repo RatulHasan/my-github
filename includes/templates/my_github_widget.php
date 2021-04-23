@@ -1,6 +1,6 @@
 <div class="plugin-side-options">
     <?php if ( $show_avatar ): ?>
-    <img class="avatar-image-circle" src="<?php echo esc_url( $body->avatar_url ); ?>" alt="<?php echo esc_attr( $body->name ); ?>">
+    <img class="widget-avatar-image-circle" src="<?php echo esc_url( $body->avatar_url ); ?>" alt="<?php echo esc_attr( $body->name ); ?>">
     <?php endif; ?>
     <h5>
         <a class="text-decoration-none" href="<?php echo esc_url( $body->html_url ); ?>" target="_blank"><?php echo esc_html( $body->name ); ?></a>
