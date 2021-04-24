@@ -49,11 +49,38 @@ class Settings {
     }
 
     /**
+     * External plugins
+     *
+     * @param array $plugins plugins.
+     *
+     * @return mixed
+     */
+    public function my_github_mce_external_plugins( array $plugins ) {
+        $plugins['my_github_shortcode_mc_button'] = MY_GITHUB_ASSETS . '/my_github_qtags.js';
+        return $plugins;
+    }
+
+    /**
+     * Button for my github
+     *
+     * @param array $buttons all buttons.
+     *
+     * @return mixed
+     */
+    public function my_github_mce_buttons( array $buttons ) {
+        $buttons[] = 'my_github_shortcode_button';
+        return $buttons;
+    }
+    /**
      * Register settings page
      *
      * @return void
      */
     public function register_settings_page() {
+		// Add TinyMC Button.
+        add_filter( 'mce_external_plugins', array( $this, 'my_github_mce_external_plugins' ) );
+        add_filter( 'mce_buttons', array( $this, 'my_github_mce_buttons' ) );
+
         $this->sections = array(
             array(
                 'id'       => 'my_github_section',

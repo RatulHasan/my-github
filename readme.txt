@@ -1,6 +1,6 @@
 === My Github ===
 Plugin Name: My Github
-Version: 1.1.0
+Version: 1.2.1
 Author: Ratul Hasan
 Contributors: ratulhasan, rajankarmakar
 Tags: github, profile, portfolio, developer, development, embed, oembed
@@ -18,6 +18,7 @@ A simple and nice WordPress plugin that can track your GitHub's profile. You can
 If the installation is okay, go  and create a page and/or post or update a page and/or post and insert a Shortcode 👉 [my_github] to show your profile.
 You can also find Quick Tags in your editor. You can also setup your settings from My GitHub under Settings page. That's it.
 Currently supports:
+* Editor ShortCode support
 * GitHub Widget Profile View
 * User profiles
 * Repositories
@@ -54,6 +55,8 @@ Not yet, we're trying to add custom templating - [Contribute](https://github.com
 3. GitHub Widget Profile View
 
 == Changelog ==
+= 1.2.1 =
+* Add Editor ShortCode support.
 = 1.2.0 =
 * Add GitHub Widget Profile View.
 
