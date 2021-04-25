@@ -23,7 +23,7 @@ Developers can also add their custom header name by using the hook `git_name_hea
         return "My Github Showcase";
     });
     ``
-#### Changelog
+### Changelog
 = 1.2.1 =
 * Add Editor ShortCode support.
 
@@ -36,7 +36,7 @@ Developers can also add their custom header name by using the hook `git_name_hea
 = 1.0.0 =
 * Initial Release
 
-#### Screenshot
+### Screenshot
 GitHub Profile
 ![GitHub Profile](https://ps.w.org/my-github/assets/Screenshot-1.png?rev=2519845)
 
