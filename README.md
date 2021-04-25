@@ -35,3 +35,11 @@ Developers can also add their custom header name by using the hook `git_name_hea
 
 = 1.0.0 =
 * Initial Release
+
+#### Screenshot
+
+![GitHub Profile](https://ps.w.org/my-github/assets/Screenshot-1.png?rev=2519845)
+
+![GitHub Widget Setup](https://ps.w.org/my-github/assets/Screenshot-2.jpg?rev=2520485)
+
+![GitHub Widget Profile View](https://ps.w.org/my-github/assets/Screenshot-3.png?rev=2519845)
