@@ -1,4 +1,5 @@
 # My Github
+![GitHub Profile](https://ps.w.org/my-github/assets/banner-1544x500.jpg?rev=2524982)
 
 ### Description
 A simple and nice WordPress plugin that can track your GitHub's profile. You can showcase your Followers, Following, Company, Location, Blog URL, Twitter Account, Public Repositories, Public Repository's Used Language.
