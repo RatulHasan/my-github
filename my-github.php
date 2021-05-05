@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class MyGithub {
 
     // Plugin version.
-    const MY_GITHUB_VERSION = '1.2.1';
+    const MY_GITHUB_VERSION = '1.2.2';
 
     /**
      * FeaturedPosts constructor.

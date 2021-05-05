@@ -16,6 +16,7 @@ You can also find Quick Tags in your editor. You can also setup your settings fr
     * Repository Fork Count
     * Repository License
     * Repository's Last Pushed Time
+    * Add custom template option.
 
 Developers can also add their custom header name by using the hook `git_name_header`  like this
 
@@ -24,7 +25,18 @@ Developers can also add their custom header name by using the hook `git_name_hea
         return "My Github Showcase";
     });
     ``
+        
+Developers can also add their custom template name by using the hook `my_github_custom_template`  like this
+
+    ``
+    add_filter('my_github_custom_template', function($url){
+        return /template_path/file.php";
+    });
+    ``
 ### Changelog
+= 1.2.2 =
+* Add custom template option.
+
 = 1.2.1 =
 * Add Editor ShortCode support.
 
