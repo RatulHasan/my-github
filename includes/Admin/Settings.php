@@ -46,6 +46,9 @@ class Settings {
      */
     public function __construct() {
         add_action( 'admin_init', array( $this, 'register_settings_page' ) );
+        // Add TinyMC Button.
+        add_filter( 'mce_external_plugins', array( $this, 'my_github_mce_external_plugins' ) );
+        add_filter( 'mce_buttons', array( $this, 'my_github_mce_buttons' ) );
     }
 
     /**
@@ -77,14 +80,16 @@ class Settings {
      * @return void
      */
     public function register_settings_page() {
-		// Add TinyMC Button.
-        add_filter( 'mce_external_plugins', array( $this, 'my_github_mce_external_plugins' ) );
-        add_filter( 'mce_buttons', array( $this, 'my_github_mce_buttons' ) );
-
         $this->sections = array(
             array(
                 'id'       => 'my_github_section',
                 'title'    => __( 'GitHub Settings', 'my-github' ),
+                'callback' => '',
+                'page'     => 'my-github',
+            ),
+            array(
+                'id'       => 'my_github_template_section',
+                'title'    => __( 'Template Settings', 'my-github' ),
                 'callback' => '',
                 'page'     => 'my-github',
             ),
@@ -132,6 +137,20 @@ class Settings {
                     'type'      => 'text',
                     'link'      => __( 'Don\'t have any Personal Access Token?', 'my-github' ) . ' <a href="https://github.com/settings/tokens" target="_blank">' . __( 'Create one?', 'my-github' ) . '</a>',
 					'value'     => isset( $my_github_details['my_github_access_token'] ) ? esc_attr( $my_github_details['my_github_access_token'] ) : '',
+                ),
+            ),
+            array(
+                'id'       => 'is_show_my_github_custom_template',
+                'title'    => __( 'Show in custom template', 'my-github' ),
+                'callback' => array( $this, 'cb_my_github_input' ),
+                'page'     => 'my-github',
+                'section'  => 'my_github_template_section',
+                'args'     => array(
+                    'label_for' => 'is_show_in_custom_template',
+                    'name'      => 'my_github_details[is_show_in_custom_template]',
+                    'type'      => 'checkbox',
+                    'value'     => 1,
+                    'selected'  => isset( $my_github_details['is_show_in_custom_template'] ) ? esc_attr( $my_github_details['is_show_in_custom_template'] ) : '',
                 ),
             ),
             array(
