@@ -1,7 +1,11 @@
-QTags.addButton( 'my-github-tag-button', 'github', '[my_github]' );
+/**
+ * For Browser tags.
+ *
+ * @package My GitHub
+ */
 
-// For TinyMC.
-;(function () {
+;(function ($) {
+    QTags.addButton( 'my-github-tag-button', 'github', '[my_github]' );
     tinyMCE.PluginManager.add(
         'my_github_shortcode_mc_button',
         function (editor, url) {
@@ -16,4 +20,4 @@ QTags.addButton( 'my-github-tag-button', 'github', '[my_github]' );
 			);
 		}
     );
-})();
+})( jQuery );
