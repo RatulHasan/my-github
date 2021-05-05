@@ -38,7 +38,7 @@ Developers can also add their custom header name by using the hook `git_name_hea
     });
     ``
 
-Developers can also add their custom template name by using the hook `my_github_custom_template`  like this
+Developers can also add their custom template by using the hook `my_github_custom_template`  like this
 
     ``
     add_filter('my_github_custom_template', function($url){
