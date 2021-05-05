@@ -21,21 +21,21 @@ use My\GitHub\Transient;
     <div class="pure-g">
         <div class="pure-u-1-4" style='height:100vh;'>
             <div class="plugin-side-options">
-                <img class="avatar-image-circle" src="<?php echo esc_url( $body->avatar_url ); ?>" alt="<?php echo esc_attr( $body->name ); ?>">
+                <img class="img-fluid avatar-image-circle" src="<?php echo esc_url( $body->avatar_url ); ?>" alt="<?php echo esc_attr( $body->name ); ?>">
                 <h5>
                     <a class="text-decoration-none" href="<?php echo esc_url( $body->html_url ); ?>" target="_blank"><?php echo esc_html( $body->name ); ?></a>
                 </h5>
                 <b class="small"><?php echo esc_html( $body->bio ); ?></b>
                 <hr />
                 <?php
-                if ( isset( $my_github_details['is_show_followers'] ) ) {
+                if ( isset( $this->admin_details['is_show_followers'] ) ) {
                     ?>
                     <div class="small">
                         <i class="fas fa-user"></i> <strong><?php echo esc_html( $body->followers ); ?> </strong> Followers
                     </div>
                     <?php
                 }
-                if ( isset( $my_github_details['is_show_following'] ) ) {
+                if ( isset( $this->admin_details['is_show_following'] ) ) {
                     ?>
                     <div class="small">
                         <i class="far fa-user"></i> <strong><?php echo esc_html( $body->following ); ?></strong> Following
@@ -43,7 +43,7 @@ use My\GitHub\Transient;
                     <?php
                 }
 
-                if ( isset( $my_github_details['is_show_company'] ) ) {
+                if ( isset( $this->admin_details['is_show_company'] ) ) {
                     if ( isset( $body->company ) ) {
                         ?>
                         <div class="small">
@@ -53,7 +53,7 @@ use My\GitHub\Transient;
                     }
                 }
 
-                if ( isset( $my_github_details['is_show_location'] ) ) {
+                if ( isset( $this->admin_details['is_show_location'] ) ) {
                     if ( isset( $body->location ) ) {
                         ?>
                         <div class="small">
@@ -63,7 +63,7 @@ use My\GitHub\Transient;
                     }
                 }
 
-                if ( isset( $my_github_details['is_show_email'] ) ) {
+                if ( isset( $this->admin_details['is_show_email'] ) ) {
                     if ( isset( $body->email ) ) {
                         ?>
                         <div class="small">
@@ -74,7 +74,7 @@ use My\GitHub\Transient;
                     }
                 }
 
-                if ( isset( $my_github_details['is_show_blog'] ) ) {
+                if ( isset( $this->admin_details['is_show_blog'] ) ) {
                     if ( isset( $body->blog ) ) {
                         $blog = substr( $body->blog, 0, 20 );
                         if ( strlen( $body->blog ) > 20 ) {
@@ -89,7 +89,7 @@ use My\GitHub\Transient;
                     }
                 }
 
-                if ( isset( $my_github_details['is_show_twitter'] ) ) {
+                if ( isset( $this->admin_details['is_show_twitter'] ) ) {
                     if ( isset( $body->twitter_username ) ) {
                         ?>
                         <div class="small">
@@ -107,7 +107,7 @@ use My\GitHub\Transient;
         <div class="pure-u-3-4">
             <div class="plugin-demo-content-border">
                 <?php
-                if ( isset( $my_github_details['is_show_my_github_public_repos'] ) ) {
+                if ( isset( $this->admin_details['is_show_my_github_public_repos'] ) ) {
 					$url = $body->repos_url . '?sort=pushed_at&order=desc';
 					if ( isset( $_GET['repo_page'] ) ) {
                         if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'my_repo_page_nonce' ) ) {
@@ -177,7 +177,7 @@ use My\GitHub\Transient;
 								echo '<div>' . esc_attr( $repos->description ) . '</div>';
 							}
 
-							if ( isset( $my_github_details['is_show_my_github_repos_language'] ) ) {
+							if ( isset( $this->admin_details['is_show_my_github_repos_language'] ) ) {
 								$language_url = 'https://api.github.com/repos/' . esc_html( $body->login ) . '/' . esc_html( $repos->name )
                                         . '/languages';
 								$language     = Transient::get_my_github_details( $language_url );
