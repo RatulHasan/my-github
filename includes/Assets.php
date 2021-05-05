@@ -34,7 +34,7 @@ class Assets {
      *
      * @return void
      */
-    public function register_admin_scripts( string $screen ) {
+    public function register_admin_scripts( $screen ) {
         $scripts = $this->get_admin_scripts();
         foreach ( $scripts as $handle => $script ) {
             wp_register_script( $handle, $script['src'], $script['deps'], $script['ver'], true );
@@ -52,9 +52,9 @@ class Assets {
     public function get_admin_scripts() {
         return array(
             'my-github-scripts' => array(
-                'src'  => MY_GITHUB_ASSETS . '/my_github_qtags.js',
+                'src'  => MY_GITHUB_ASSETS . '/my_github_qtags.min.js',
                 'deps' => array( 'quicktags' ),
-                'ver'  => filemtime( MY_GITHUB_BASE_PATH . '/assets/my_github_qtags.js' ),
+                'ver'  => filemtime( MY_GITHUB_BASE_PATH . '/assets/my_github_qtags.min.js' ),
             ),
         );
     }
