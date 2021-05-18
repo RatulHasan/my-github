@@ -59,7 +59,7 @@ class Settings {
      * @return mixed
      */
     public function my_github_mce_external_plugins( array $plugins ) {
-        $plugins['my_github_shortcode_mc_button'] = MY_GITHUB_ASSETS . '/my_github_qtags.js';
+        $plugins['my_github_shortcode_mc_button'] = MY_GITHUB_ASSETS . '/my_github_qtags.min.js';
         return $plugins;
     }
 
