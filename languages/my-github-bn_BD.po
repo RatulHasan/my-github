@@ -1,110 +1,126 @@
-# Copyright (C) 2021 Ratul Hasan
-# This file is distributed under the same license as the My Github plugin.
+# Translation of Plugins - My Github - Development (trunk) in Bengali (Bangladesh)
+# This file is distributed under the same license as the Plugins - My Github - Development (trunk) package.
 msgid ""
 msgstr ""
-"Project-Id-Version: My Github 1.1.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/my-github\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2021-05-19 10:46:24+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-04-21T22:55:05+00:00\n"
-"PO-Revision-Date: 2021-04-22 05:18+0600\n"
-"X-Generator: Poedit 2.4.2\n"
-"X-Domain: my-github\n"
-"Last-Translator: \n"
-"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/3.0.0-alpha.2\n"
 "Language: bn_BD\n"
+"Project-Id-Version: Plugins - My Github - Development (trunk)\n"
 
-#. Plugin Name of the plugin
-#: includes/templates/my_github_settings.php:14
-msgid "My Github"
+#: includes/Admin/Settings.php:144
+msgid "Show in custom template"
+msgstr "কাস্টম টেমপ্লেটে প্রদর্শন করুন"
+
+#: includes/Admin/Settings.php:92
+msgid "Template Settings"
+msgstr "টেম্পলেট সেটিংস"
+
+#: includes/Frontend/Widget.php:29
+msgid "Showcase your GitHub profile."
+msgstr "আপনার গিটহাব প্রোফাইলটি প্রদর্শন করুন।"
+
+#: includes/Frontend/Widget.php:98
+msgid "Show/Hide profile avatar"
+msgstr "প্রোফাইলের ছবি দেখান / লুকান"
+
+#: includes/Frontend/Widget.php:93
+msgid "Title:"
+msgstr "শিরোনাম:"
+
+#: includes/Admin/Settings.php:138
+msgid "Create one?"
+msgstr "একটি তৈরী করুন?"
+
+#: includes/Admin/Settings.php:138
+msgid "Don't have any Personal Access Token?"
+msgstr "কোনও ব্যক্তিগত অ্যাক্সেস টোকেন নেই?"
+
+#: includes/Admin/Settings.php:130
+msgid "Personal Access Token"
+msgstr "ব্যক্তিগত অ্যাক্সেস টোকেন"
+
+#: includes/Frontend/Widget.php:28 includes/Admin/Menu.php:37
+#: includes/Admin/Menu.php:38
+msgid "My GitHub"
 msgstr "আমার গিটহাব"
 
-#. Plugin URI of the plugin
-msgid "https://github.com/RatulHasan/my-github"
-msgstr ""
+#: includes/Admin/Settings.php:270
+msgid "Show Repos Language"
+msgstr "রেপোর ভাষা দেখান"
 
-#. Description of the plugin
-msgid "A simple and nice WordPress plugin that can track your github's profile."
-msgstr "একটি সহজ এবং সুন্দর ওয়ার্ডপ্রেস প্লাগইন যা আপনার গিটহাব  এর প্রোফাইল ট্র্যাক করতে পারে।"
+#: includes/Admin/Settings.php:256
+msgid "Show Public Repos"
+msgstr "পাবলিক রেপো দেখান"
+
+#: includes/Admin/Settings.php:242
+msgid "Show Twitter"
+msgstr "টুইটার দেখান"
+
+#: includes/Admin/Settings.php:228
+msgid "Show Blog"
+msgstr "ব্লগ দেখান"
+
+#: includes/Admin/Settings.php:214
+msgid "Show Email"
+msgstr "ইমেইল দেখান"
+
+#: includes/Admin/Settings.php:200
+msgid "Show Location"
+msgstr "অবস্থান দেখান"
+
+#: includes/Admin/Settings.php:186
+msgid "Show Company"
+msgstr "কোম্পানি দেখান"
+
+#: includes/Admin/Settings.php:172
+msgid "Show Following"
+msgstr "অনুসরণ দেখান"
+
+#: includes/Admin/Settings.php:158
+msgid "Show Followers"
+msgstr "অনুসারীদের দেখান"
+
+#: includes/Admin/Settings.php:117
+msgid "GitHub Username"
+msgstr "গিটহাব ব্যবহারকারীর নাম"
+
+#: includes/Admin/Settings.php:98
+msgid "View Settings"
+msgstr "সেটিংস দেখুন"
+
+#: includes/Admin/Settings.php:86
+msgid "GitHub Settings"
+msgstr "গিটহাব সেটিংস"
+
+#: includes/templates/my_github_profile.php:114
+msgid "Security check failed!"
+msgstr "সুরক্ষা চেক ব্যর্থ!"
+
+#: includes/Frontend/Shortcode.php:75 includes/Frontend/Widget.php:70
+msgid "GitHub Profile"
+msgstr "গিটহাব প্রোফাইল"
+
+#. Author URI of the plugin
+msgid "https://ratuljh.wordpress.com/"
+msgstr "https://ratuljh.wordpress.com/"
 
 #. Author of the plugin
 msgid "Ratul Hasan"
 msgstr "রাতুল হাসান"
 
-#. Author URI of the plugin
-msgid "https://ratuljh.wordpress.com/"
-msgstr ""
+#. Description of the plugin
+msgid "A simple and nice WordPress plugin that can track your github's profile."
+msgstr "একটি সহজ এবং সুন্দর ওয়ার্ডপ্রেস প্লাগইন যা আপনার গিটহাব  এর প্রোফাইল ট্র্যাক করতে পারে।"
 
-#: includes/Admin/Menu.php:37 includes/Admin/Menu.php:38
-msgid "My GitHub"
+#. Plugin URI of the plugin
+msgid "https://github.com/RatulHasan/my-github"
+msgstr "https://github.com/RatulHasan/my-github"
+
+#. Plugin Name of the plugin
+#: includes/templates/my_github_settings.php:14
+msgid "My Github"
 msgstr "আমার গিটহাব"
-
-#: includes/Admin/Settings.php:60
-msgid "GitHub Settings"
-msgstr "গিটহাব সেটিংস"
-
-#: includes/Admin/Settings.php:66
-msgid "View Settings"
-msgstr "সেটিংস দেখুন"
-
-#: includes/Admin/Settings.php:85
-msgid "GitHub Username"
-msgstr "গিটহাব ব্যবহারকারীর নাম"
-
-#: includes/Admin/Settings.php:98
-msgid "Personal Access Token"
-msgstr "ব্যক্তিগত অ্যাক্সেস টোকেন"
-
-#: includes/Admin/Settings.php:111
-msgid "Show Followers"
-msgstr "অনুসারীদের দেখান"
-
-#: includes/Admin/Settings.php:125
-msgid "Show Following"
-msgstr "অনুসরণ দেখান"
-
-#: includes/Admin/Settings.php:139
-msgid "Show Company"
-msgstr "কোম্পানি দেখান"
-
-#: includes/Admin/Settings.php:153
-msgid "Show Location"
-msgstr "অবস্থান দেখান"
-
-#: includes/Admin/Settings.php:167
-msgid "Show Email"
-msgstr "ইমেইল দেখান"
-
-#: includes/Admin/Settings.php:181
-msgid "Show Blog"
-msgstr "ব্লগ দেখান"
-
-#: includes/Admin/Settings.php:195
-msgid "Show Twitter"
-msgstr "টুইটার দেখান"
-
-#: includes/Admin/Settings.php:209
-msgid "Show Public Repos"
-msgstr "পাবলিক রেপো দেখান"
-
-#: includes/Admin/Settings.php:223
-msgid "Show Repos Language"
-msgstr "রেপোর ভাষা দেখান"
-
-#: includes/Admin/Settings.php:246
-msgid "Don't have any Personal Access Token?"
-msgstr "কোনও ব্যক্তিগত অ্যাক্সেস টোকেন নেই?"
-
-#: includes/Admin/Settings.php:246
-msgid "Create one?"
-msgstr "একটি তৈরী করুন?"
-
-#: includes/Frontend/Shortcode.php:51
-msgid "GitHub Profile"
-msgstr "গিটহাব প্রোফাইল"
-
-#: includes/templates/my_github_profile.php:114
-msgid "Security check failed!"
-msgstr "সুরক্ষা চেক ব্যর্থ!"
