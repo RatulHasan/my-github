@@ -29,7 +29,7 @@ class MyGithub {
     const MY_GITHUB_VERSION = '1.2.2';
 
     /**
-     * FeaturedPosts constructor.
+     * MyGithub constructor.
      */
     public function __construct() {
         require_once __DIR__ . '/vendor/autoload.php';
