@@ -200,18 +200,16 @@ use My\GitHub\Transient;
 							$total_pages = ceil( $body->public_repos / 30 );
                             $nonce       = wp_create_nonce( 'my_repo_page_nonce' );
 							$next_page   = '<a class="ml-25" href=' . get_permalink() . '?repo_page=2&_wpnonce=' . $nonce . '>Next &raquo;</a>';
+                            $pre_page = '';
 							if ( isset( $_GET['repo_page'] ) ) {
 								$pre_page = '<a href=' . esc_url_raw( get_permalink() . '?repo_page=' . ( $_GET['repo_page'] - 1 ) . '&_wpnonce=' . $nonce ). '>&laquo; Previous</a> ';
-								if ( 2 <= $_GET['repo_page'] ) {
+								if ( 2 == $_GET['repo_page'] ) {
 									$pre_page = '<a href=' . esc_url_raw (get_permalink() ) . '>&laquo; Previous</a> ';
 								}
-
 								$next_page = '<a class="ml-25" href=' . esc_url_raw( get_permalink() . '?repo_page=' . ( $_GET['repo_page'] + 1 ) . '&_wpnonce=' . $nonce ) . '>Next &raquo;</a>';
 								if ( $_GET['repo_page'] >= $total_pages ) {
 									$next_page = '';
 								}
-							} else {
-								$pre_page = '';
 							}
 							echo wp_kses(
                                 $pre_page,
@@ -232,6 +230,16 @@ use My\GitHub\Transient;
 									),
                                 )
                             );
+//                            $big = 999999999;
+//                            $current = isset( $_GET['repo_page']) ? $_GET['repo_page'] : 1;
+//                            echo paginate_links(
+//                                array(
+////                                    'base'    => str_replace( $big, '%#%', get_pagenum_link( $big ) ),
+//                                    'format'  => '?page=%#%',
+//                                    'current' => $current,
+//                                    'total'   => $total_pages,
+//                                )
+//                            );
 						}
                     }
 				?>
