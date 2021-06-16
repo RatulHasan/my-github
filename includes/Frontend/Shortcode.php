@@ -54,8 +54,10 @@ class Shortcode {
      */
     public function cb_template_include( $template ) {
         global $post;
-        if ( has_shortcode( $post->post_content, 'my_github' ) ) {
-            $template = apply_filters( 'my_github_custom_template', MY_GITHUB_INCLUDE_PATH . '/templates/my_github_main.php' );
+        if ( $post ) {
+            if ( has_shortcode( $post->post_content, 'my_github' ) ) {
+                $template = apply_filters( 'my_github_custom_template', MY_GITHUB_INCLUDE_PATH . '/templates/my_github_main.php' );
+            }
         }
         return $template;
     }
