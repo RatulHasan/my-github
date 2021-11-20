@@ -59,17 +59,6 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
 
-      - id: changes
-
-        run: |
-
-          URL="https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/files"
-
-          FILES=$(curl --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' -s -X GET -G $URL | jq -r '.[] | .filename' | xargs)
-
-          echo "::set-output name=files::$FILES"
-
-
       - name: Install PHP_CodeSniffer
         run: |
           curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
