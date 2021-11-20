@@ -36,7 +36,7 @@ final class MyGithub {
         $this->localization_setup();
         $this->define_constant();
 
-        add_action('activate_plugin', array( $this, 'cb_activate_plugin' ) );
+        add_action( 'activate_plugin', array( $this, 'cb_activate_plugin' ) );
         add_action( 'plugins_loaded', array( $this, 'initiate_plugin' ) );
     }
 
