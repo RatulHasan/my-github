@@ -30,13 +30,33 @@ jobs:
 
           coverage: none
 
-          tools: cs2pr, composer:v2
+          tools: cs2pr, composer:v1
 
 
       - name: Install dependencies
 
         run: composer install --prefer-dist --no-suggest --no-progress
 
+
+      - name: Get composer cache directory
+
+        id: composercache
+
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+
+
+      - name: Cache dependencies
+
+        uses: actions/cache@v2
+
+        with:
+
+          path: ${{ steps.composercache.outputs.dir }}
+
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+
+          restore-keys: ${{ runner.os }}-composer-
 
 
       - id: changes
