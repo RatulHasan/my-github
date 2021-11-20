@@ -12,6 +12,9 @@
             "homepage": "https://github.com/RatulHasan/"
         }
     ],
+    "require-dev": {
+        "squizlabs/php_codesniffer": "*"
+    }
     "autoload": {
         "psr-4": {
             "My\\GitHub\\": "includes/"
