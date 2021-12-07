@@ -3,37 +3,34 @@ name: Inspections
 # Triggers the workflow on push or pull request events
 on: [push, pull_request]
 jobs:
-  runPHPCSInspection:
-    name: Run PHPCS inspection
+  phpcs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.0'
+          php-version: '7.3'
           coverage: none
-          tools: cs2pr, composer:v1
+          tools: composer, cs2pr
 
-      - name: Get composer cache directory
-        id: composercache
+      - name: Get Composer cache directory
+        id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
-      - name: Cache dependencies
-        uses: actions/cache@v2
+      - name: Setup cache
+        uses: pat-s/always-upload-cache@v1.1.4
         with:
-          path: ${{ steps.composercache.outputs.dir }}
+          path: ${{ steps.composer-cache.outputs.dir }}
+          # Use the hash of composer.json as the key for your cache if you do not commit composer.lock. 
+          # key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-suggest --no-progress
 
-      - id: changes
-        run: |
-          URL="https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/files"
-          FILES=$(curl --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' -s -X GET -G $URL | jq -r '.[] | .filename' | xargs)
-          echo "::set-output name=files::$FILES"
       - name: Detect coding standard violations
-        run: vendor/squizlabs/php_codesniffer/bin/phpcs ${{ steps.changes.outputs.files }} -q --report=checkstyle | cs2pr --graceful-warnings
+        run: vendor/bin/phpcs -q --report=checkstyle | cs2pr --graceful-warnings
