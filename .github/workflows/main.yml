@@ -1,6 +1,5 @@
-on: pull_request
-
 name: Inspections
+on: [push, pull_request]
 jobs:
   runPHPCSInspection:
     name: Run PHPCS inspection
