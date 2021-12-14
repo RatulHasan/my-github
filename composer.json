@@ -15,14 +15,6 @@
     "require-dev": {
         "squizlabs/php_codesniffer": "*"
     },
-    "scripts": {
-        "phpcs": [
-            "phpcs -p -s"
-        ],
-        "phpcbf": [
-            "phpcbf -p"
-        ]
-    },
     "autoload": {
         "psr-4": {
             "My\\GitHub\\": "includes/"
