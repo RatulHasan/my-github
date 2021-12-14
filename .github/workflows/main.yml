@@ -28,5 +28,5 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-suggest --no-progress
         
-      - name: Run phpcs
-        run: phpcs --standard=PSR12 ./phpcs.xml
+      - name: Detect coding standard violations
+        run: vendor/bin/phpcs ${{ steps.changes.outputs.files }} -q --report=checkstyle | cs2pr --graceful-warnings
