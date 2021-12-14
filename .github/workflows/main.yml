@@ -27,6 +27,3 @@ jobs:
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-suggest --no-progress
-        
-      - name: Detect coding standard violations
-        run: composer phpcs
