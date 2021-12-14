@@ -28,5 +28,5 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-suggest --no-progress
         
-      - name: Run phpCs
-        run: phpcs --standard=./phpcs.xml
+      - name: Run phpcs
+        run: phpcs --standard=PSR12 ./phpcs.xml
