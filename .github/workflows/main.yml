@@ -29,4 +29,4 @@ jobs:
         run: composer install --prefer-dist --no-suggest --no-progress
         
       - name: Run phpCs
-        run: composer phpcs
+        run: phpcs --standard=./phpcs.xml
