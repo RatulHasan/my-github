@@ -25,6 +25,7 @@ If applicable, add screenshots to help explain your problem.
 
 **Environment (please complete the following information):**
 - Php version [e.g. 7.2, 5.6]
+- WordPress version [e.g. 4.9, 4.7]
 - Browser [e.g. chrome, safari]
 
 **Additional context**
