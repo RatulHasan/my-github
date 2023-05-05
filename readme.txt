@@ -1,6 +1,6 @@
 === My Github ===
 Plugin Name: My Github
-Version: 1.2.2
+Version: 1.2.3
 Author: Ratul Hasan
 Contributors: ratulhasan, rajankarmakar
 Tags: github, profile, portfolio, developer, development, embed, oembed
@@ -58,16 +58,30 @@ Please give us feedback, contribute and file technical bugs on [GitHub Repo](htt
 = Can I change the layout? =
 Yes! we added custom template, but it's style is very basic - [Contribute](https://github.com/RatulHasan/my-github)!
 
+## Privacy Policy
+My Github uses [Appsero](https://appsero.com) SDK to collect some telemetry data upon user's confirmation. This helps us to troubleshoot problems faster & make product improvements.
+
+Appsero SDK **does not gather any data by default.** The SDK only starts gathering basic telemetry data **when a user allows it via the admin notice**. We collect the data to ensure a great user experience for all our users.
+
+Integrating Appsero SDK **DOES NOT IMMEDIATELY** start gathering data, **without confirmation from users in any case.**
+
+Learn more about how [Appsero collects and uses this data](https://appsero.com/privacy-policy/).
+
 == Screenshots ==
 1. GitHub Profile
 2. GitHub Widget Setup
 3. GitHub Widget Profile View
 
 == Changelog ==
+= 1.2.3 =
+* Tested with the new WordPress version 6.2
+
 = 1.2.2 =
 * Add custom template option.
+
 = 1.2.1 =
 * Add Classic Editor ShortCode support.
+
 = 1.2.0 =
 * Add GitHub Widget Profile View.
 

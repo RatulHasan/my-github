@@ -3,7 +3,7 @@
  * Plugin Name:         My Github
  * Plugin URI:          https://github.com/RatulHasan/my-github
  * Description:         A simple and nice WordPress plugin that can track your github's profile.
- * Version:             1.2.2
+ * Version:             1.2.3
  * Requires at least:   5.2
  * Author:              Ratul Hasan
  * Author URI:          https://ratuljh.wordpress.com/
@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 final class MyGithub {
 
     // Plugin version.
-    const MY_GITHUB_VERSION = '1.2.2';
+    const MY_GITHUB_VERSION = '1.2.3';
 
     /**
      * MyGithub constructor.
@@ -110,3 +110,24 @@ function my_github() {
  * Hit start
  */
 my_github();
+
+
+/**
+ * Initialize the plugin tracker
+ *
+ * @return void
+ */
+function appsero_init_tracker_my_github() {
+
+	if ( ! class_exists( 'Appsero\Client' ) ) {
+		require_once __DIR__ . '/appsero/src/Client.php';
+	}
+
+	$client = new Appsero\Client( '8161e2ef-b32c-4832-bf2a-5a746b2d617c', 'My Github', __FILE__ );
+
+	// Active insights
+	$client->insights()->init();
+
+}
+
+appsero_init_tracker_my_github();

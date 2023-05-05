@@ -34,6 +34,9 @@ Developers can also add their custom template name by using the hook `my_github_
     });
     ``
 ### Changelog
+= 1.2.3 =
+* Tested with the new WordPress version 6.2
+
 = 1.2.2 =
 * Add custom template option.
 
