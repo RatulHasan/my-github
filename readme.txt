@@ -5,7 +5,7 @@ Author: Ratul Hasan
 Contributors: ratulhasan, rajankarmakar
 Tags: github, profile, portfolio, developer, development, embed, oembed
 Requires at least: 5.2
-Tested up to: 5.7.1
+Tested up to: 6.2
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPL-2.0-or-later
