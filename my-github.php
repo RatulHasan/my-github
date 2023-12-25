@@ -3,8 +3,9 @@
  * Plugin Name:         My Github
  * Plugin URI:          https://github.com/RatulHasan/my-github
  * Description:         A simple and nice WordPress plugin that can track your github's profile.
- * Version:             1.2.3
+ * Version:             1.2.4
  * Requires at least:   5.2
+ * Tested up to:        6.4.2
  * Author:              Ratul Hasan
  * Author URI:          https://ratuljh.wordpress.com/
  * License:             GPL-2.0-or-later
@@ -26,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 final class MyGithub {
 
     // Plugin version.
-    const MY_GITHUB_VERSION = '1.2.3';
+    const MY_GITHUB_VERSION = '1.2.4';
 
     /**
      * MyGithub constructor.

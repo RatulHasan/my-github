@@ -1,11 +1,11 @@
 === My Github ===
 Plugin Name: My Github
-Version: 1.2.3
+Version: 1.2.4
 Author: Ratul Hasan
 Contributors: ratulhasan, rajankarmakar
 Tags: github, profile, portfolio, developer, development, embed, oembed
 Requires at least: 5.2
-Tested up to: 6.2
+Tested up to: 6.4.2
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPL-2.0-or-later
@@ -73,6 +73,9 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 3. GitHub Widget Profile View
 
 == Changelog ==
+= 1.2.4 =
+* Tested with the new WordPress version 6.4.2
+
 = 1.2.3 =
 * Tested with the new WordPress version 6.2
 
